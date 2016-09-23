@@ -1,0 +1,34 @@
+{
+  "name": "cordova-plugin-leanpush",
+  "version": "0.4.0",
+  "description": "A Cordova plugin for LeanCloud Push and Analytics services",
+  "cordova": {
+    "id": "cordova-plugin-leanpush",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wujun4code/cordova-plugin-leanpush.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "leancloud",
+    "push",
+    "analytics"
+  ],
+  "author": "Wu Jun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BenBBear/cordova-plugin-leanpush/issues"
+  },
+  "homepage": "https://github.com/BenBBear/cordova-plugin-leanpush",
+  "devDependencies": {
+    "thunks": "^3.5.1",
+    "xml2js": "^0.4.12"
+  }
+}

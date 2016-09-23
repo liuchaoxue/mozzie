@@ -1,0 +1,14 @@
+{
+    "ImageIO.framework": 1,
+    "CoreLocation.framework": 2,
+    "AVFoundation.framework": 1,
+    "libz.dylib": 1,
+    "libsqlite3.0.dylib": 1,
+    "CoreTelephony.framework": 2,
+    "SystemConfiguration.framework": 2,
+    "Security.framework": 1,
+    "libstdc++.6.dylib": 1,
+    "libicucore.dylib": 1,
+    "libsqlite3.dylib": 1,
+    "QuartzCore.framework": 1
+}
