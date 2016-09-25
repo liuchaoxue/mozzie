@@ -3,22 +3,31 @@
  */
 appServices
     .factory("CurrentPosition", function ($window) {
+        function error() {
+            alert("无法获取您的位置");
+        }
         return {
             getPositionPoint: function (cb) {
-                try {
-                    new BMap.Geolocation().getCurrentPosition(function (data) {
-                        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                            var point = new BMap.Point(data.point.lng, data.point.lat), geocoder = new BMap.Geocoder();
-                            geocoder.getLocation(point, function (textData) {
-                                cb(data.point, textData.addressComponents);
-                            });
-                        }
-                        else {
-                            alert('failed' + this.getStatus());
-                        }
-                    }, {enableHighAccuracy: true});
-                } catch (err) {
-                    $window.location.reload();
+                if (!navigator.geolocation) {
+                    return alert("您的浏览器不支持地理位置");
+                }
+                navigator.geolocation.getCurrentPosition(success, error);
+
+                function success(position) {
+                    AMap.service('AMap.Geocoder', function () {//回调函数
+                        geocoder = new AMap.Geocoder({
+                            city: "010"//城市，默认：“全国”
+                        });
+
+                        var lnglatXY = [position.coords.longitude, position.coords.latitude];//地图上所标点的坐标
+                        geocoder.getAddress(lnglatXY, function (status, result) {
+                            if (status === 'complete' && result.info === 'OK') {
+                                cb(position, result.regeocode)
+                            } else {
+                                alert('定位失败');
+                            }
+                        });
+                    });
                 }
             }
         }

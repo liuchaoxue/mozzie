@@ -7,7 +7,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
         $ionicConfigProvider.navBar.alignTitle('center');
     })
 
-    .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, AndroidUuid, JumpPagService) {
+    .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

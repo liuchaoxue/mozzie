@@ -20,12 +20,12 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
         showLoading();
         CurrentPosition.getPositionPoint(function (point, data) {
             $scope.currentPoint = point;
-
-            $scope.takePhotoPosition = data.province + data.city + data.district + data.street;
-            $scope.currentcity = data.city;
-            $scope.currentAreaName = data.district;
+            $scope.takePhotoPosition = data.formattedAddress;
+            $scope.currentcity = data.addressComponent.city;
+            $scope.currentAreaName = data.addressComponent.district;
             $ionicLoading.hide();
         });
+
     };
 
     $scope.showSymptom = function () {
@@ -67,7 +67,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             quality: 75,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
-            allowEdit: false,
+            allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
             targetWidth: 300,
             targetHeight: 300,

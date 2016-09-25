@@ -102,7 +102,7 @@
 
 .home-position-test {
     font-size: 18px;
-    margin-top: 7px;
+    margin-top: 5px;
     float: right
 }
 
@@ -121,6 +121,7 @@
 .home-table th {
     vertical-align: middle;
     padding-top: 25px;
+    text-align: center;
 }
 
 .home-table th img {

@@ -469,6 +469,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: China Electronics Data Service Co., Ltd. (DWL9P66X9Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: China Electronics Data Service Co., Ltd. (DWL9P66X9Z)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DWL9P66X9Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"HelloCordova/Plugins/cordova-plugin-leanpush\"",
@@ -487,7 +488,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdc.mosquito;
 				PRODUCT_NAME = HelloCordova;
-				PROVISIONING_PROFILE = "70a3a981-d282-4686-ad3c-3b7f30a924fb";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "mosquito-personal";
 			};
 			name = Debug;
 		};
@@ -503,6 +505,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: China Electronics Data Service Co., Ltd. (DWL9P66X9Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: China Electronics Data Service Co., Ltd. (DWL9P66X9Z)";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = DWL9P66X9Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"HelloCordova/Plugins/cordova-plugin-leanpush\"",
@@ -518,7 +521,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdc.mosquito;
 				PRODUCT_NAME = HelloCordova;
-				PROVISIONING_PROFILE = "70a3a981-d282-4686-ad3c-3b7f30a924fb";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "mosquito-personal";
 			};
 			name = Release;
 		};

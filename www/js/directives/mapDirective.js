@@ -6,7 +6,7 @@ appDirectives
         return {
             controller: function ($element, localStorage, $scope) {
                 var map = new BMap.Map("allmap");
-                var mapPoint = new BMap.Point($scope.currentPoint.lng, $scope.currentPoint.lat);
+                var mapPoint = new BMap.Point($scope.currentPoint.longitude, $scope.currentPoint.latitude);
                 map.centerAndZoom(mapPoint, 16);
 
                 var getAddressInfo = function () {
@@ -20,7 +20,7 @@ appDirectives
                 };
 
                 function getRange(item, value) {
-                    var mapPosition = map.getDistance(new BMap.Point($scope.currentPoint.lng, $scope.currentPoint.lat), new BMap.Point(item.lng, item.lat));
+                    var mapPosition = map.getDistance(new BMap.Point($scope.currentPoint.longitude, $scope.currentPoint.latitude), new BMap.Point(item.lng, item.lat));
 
                     if (mapPosition >= 1000) {
                         local.Ym.na.sf[value].range = (mapPosition / 1000).toFixed(1) + '公里';
