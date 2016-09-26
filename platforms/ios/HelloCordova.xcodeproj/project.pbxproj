@@ -46,6 +46,8 @@
 		F2F27BFC89D341EB913C2B8D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB30BAB34BE495BBECA4466 /* AVFoundation.framework */; };
 		FADE645127A94463A599DD01 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BBC211BE5D4F27B032D875 /* libsqlite3.dylib */; };
 		FEC18FD23A6B44289B4A4799 /* CDVWechat.m in Sources */ = {isa = PBXBuildFile; fileRef = E88D32A7C69F44659D69A563 /* CDVWechat.m */; };
+		5DD2D96730F04FDCBAA1270E /* CDVConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C018AD7DD2D45EE83DC41A5 /* CDVConnection.m */; };
+		AEAAAC52887E463D9CDA2021 /* CDVReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BCF5717D3346C2BF63DDD6 /* CDVReachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,10 @@
 		F84CD4CAA1624353A1F063A4 /* CDVLocalFilesystem.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLocalFilesystem.h; path = "cordova-plugin-file/CDVLocalFilesystem.h"; sourceTree = "<group>"; };
 		FE1B684885E044479A923B75 /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; };
 		FEE39DEAFEF3417A8D3F8AA2 /* CDVFile.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVFile.h; path = "cordova-plugin-file/CDVFile.h"; sourceTree = "<group>"; };
+		9C018AD7DD2D45EE83DC41A5 /* CDVConnection.m */ = {isa = PBXFileReference; name = "CDVConnection.m"; path = "cordova-plugin-network-information/CDVConnection.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		32BCF5717D3346C2BF63DDD6 /* CDVReachability.m */ = {isa = PBXFileReference; name = "CDVReachability.m"; path = "cordova-plugin-network-information/CDVReachability.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		ACC354EE03BA4DB0AA31E07D /* CDVConnection.h */ = {isa = PBXFileReference; name = "CDVConnection.h"; path = "cordova-plugin-network-information/CDVConnection.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		F25C08F1EF5F419B93FACC2F /* CDVReachability.h */ = {isa = PBXFileReference; name = "CDVReachability.h"; path = "cordova-plugin-network-information/CDVReachability.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +309,10 @@
 				AB0F177E1EA048599D363CDC /* Toast.m */,
 				10B886BB7A8A4E2EB0BD4CD7 /* Toast+UIView.h */,
 				5806CA8A091B4054B0209030 /* Toast.h */,
+				9C018AD7DD2D45EE83DC41A5 /* CDVConnection.m */,
+				32BCF5717D3346C2BF63DDD6 /* CDVReachability.m */,
+				ACC354EE03BA4DB0AA31E07D /* CDVConnection.h */,
+				F25C08F1EF5F419B93FACC2F /* CDVReachability.h */,
 			);
 			name = Plugins;
 			path = HelloCordova/Plugins;
@@ -442,6 +452,8 @@
 				8BD1345380634CDE87BAACD8 /* AppDelegate+LeanPush.m in Sources */,
 				3C6DB7C0FCC4430EBD686A81 /* Toast+UIView.m in Sources */,
 				35896834A7C84E0D939551A6 /* Toast.m in Sources */,
+				5DD2D96730F04FDCBAA1270E /* CDVConnection.m in Sources */,
+				AEAAAC52887E463D9CDA2021 /* CDVReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

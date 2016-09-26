@@ -82,7 +82,17 @@
         <ion-nav-back-button class="button-icon icon ion-ios-arrow-back"></ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
-
+    <ion-slide-box does-continue="true" show-pager="false" auto-play="false" slide-interval="true"
+                   on-swipe-right="lastSlide()" on-swipe-left="nextSlide()" ng-click="hideWelcomePictures()" style="position: fixed;
+    z-index: 100;
+    height: 100%;">
+        <ion-slide style="z-index: 100" name="welcomeImg">
+            <img src="./img/1.png" style="width: 100%;height: 100%">
+        </ion-slide>
+        <ion-slide style="z-index: 100" name="welcomeImg">
+            <img src="./img/2.png" style="width: 100%;height: 100%">
+        </ion-slide>
+    </ion-slide-box>
     <div class="risk-modal-box" ng-hide="modalHide"></div>
     <div class="risk-modal-popup" ng-hide="modalHide">
         <div class="list fs-color fs16">

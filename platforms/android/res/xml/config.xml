@@ -34,7 +34,10 @@
     <feature name="Wechat">
         <param name="android-package" value="xu.li.cordova.wechat.Wechat" />
     </feature>
-    <name>HelloCordova</name>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <name>蚊子叮</name>
     <description>
         An Ionic Framework and Cordova project.
     </description>

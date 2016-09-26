@@ -9,6 +9,14 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
 
     .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast) {
         $ionicPlatform.ready(function () {
+            $rootScope.$on('$cordovaNetwork:online', function (event, networkState) {
+                $cordovaToast.showShortBottom('已通过' + $cordovaNetwork.getNetwork() + '连接至网络！');
+            });
+
+            $rootScope.$on('$cordovaNetwork:offline', function (event, networkState) {
+                //提醒用户的网络异常
+                $cordovaToast.showShortBottom('网络连接异常，请检查网络！');
+            });
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);

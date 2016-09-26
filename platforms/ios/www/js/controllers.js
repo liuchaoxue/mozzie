@@ -37,6 +37,11 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
         $scope.familySymptom = data;
     };
 
+    $scope.hideWelcomePictures = function () {
+        document.getElementsByName("welcomeImg")[0].style.zIndex = 0;
+        document.getElementsByName("welcomeImg")[1].style.zIndex = 0
+    };
+
     function getUserImg() {
         LeanCloudClassService.findImg({$ne: null}, function (data) {
             data.forEach(function (item) {
