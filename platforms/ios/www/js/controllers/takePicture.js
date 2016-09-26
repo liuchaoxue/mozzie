@@ -37,8 +37,8 @@ appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $
             imgPosition: $scope.takePhotoPosition,
             imgCoordinate: {
                 "__type": "GeoPoint",
-                "latitude": $scope.currentPoint.lat,
-                "longitude": $scope.currentPoint.lng
+                "latitude": $scope.currentPoint.latitude,
+                "longitude": $scope.currentPoint.longitude
             },
             img: localStorage.get("imgURL"),
             mozzieImg: $scope.mozzieimgURL || "",
@@ -47,6 +47,9 @@ appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $
     }
 
     $scope.postImg = function () {
+        if ($scope.currentPoint == undefined) {
+            return alert("请检查GPS是否开启")
+        }
         LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
             localStorage.set("lastPage", "/takePicture");
             JumpPagService.path("/home");

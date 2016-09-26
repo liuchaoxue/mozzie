@@ -102,8 +102,9 @@
 
 .home-position-test {
     font-size: 18px;
-    margin-top: 5px;
-    float: right
+    position: fixed;
+    top: 13px;
+    left: 33px;
 }
 
 /*homeinfo*/
@@ -160,7 +161,7 @@
 }
 
 .home-photo-fl {
-    width: 50%;
+    width: 45%;
     display: inline-block;
     text-align: center;
 }
