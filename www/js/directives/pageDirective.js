@@ -60,17 +60,11 @@ appDirectives.directive("notLoginPage", function () {
             }
 
             function initDonut(imgHeight, textHeight) {
-                var object = {
-                    "发热": 5,
-                    "昏迷": 50,
-                    "皮疹": 80,
-                    "头疼和眼眶疼": 100
-                };
                 var demoGauge = new Donut(imgHeight).setOptions(getOpts());
                 demoGauge.setTextField(textHeight);
                 demoGauge.maxValue = 100;
                 demoGauge.animationSpeed = 5;
-                demoGauge.set(object[localStorage.get("riskAssessmentIndex")]);
+                demoGauge.set(localStorage.get("postData"));
             }
         },
         templateUrl: "templates/assessmentResultsInfo.html"

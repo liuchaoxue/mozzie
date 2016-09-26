@@ -21,7 +21,8 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-file",
-    "cordova-plugin-wechat"
+    "cordova-plugin-wechat",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": [
     "ios"

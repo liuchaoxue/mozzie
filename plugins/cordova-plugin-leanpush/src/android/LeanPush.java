@@ -81,7 +81,7 @@ public class LeanPush extends CordovaPlugin {
     private void getInstallation(final CallbackContext callbackContext) {
         String installationId = AVInstallation.getCurrentInstallation().getInstallationId();
         if (installationId == null) {
-            callbackContext.error("Fail to get Installation.");
+                callbackContext.error("Fail to get Installation.");
         } else {
             callbackContext.success("android," + installationId);
         }

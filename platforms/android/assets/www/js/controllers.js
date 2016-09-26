@@ -39,7 +39,6 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
 
     $scope.hideWelcomePictures = function () {
         document.getElementsByName("welcomeImg")[0].style.display = "none";
-        document.getElementsByName("welcomeImg")[1].style.display = "none";
     };
 
     function getUserImg() {

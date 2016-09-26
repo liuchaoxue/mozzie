@@ -26,19 +26,19 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
                 StatusBar.styleDefault();
             }
 
-            window.LeanPush.init();
-
-            window.LeanPush.getInstallation(function (data) {
-                data = {
-                    'deviceType': $scope.isiOS ? 'ios' : 'android'
-                };
-            }, function (error) {
-                alert(error)
-            });
-
-            window.LeanPush.onNotificationReceived(function (data) {
-                console.log(JSON.stringify(data))
-            });
+            //window.LeanPush.init();
+            //
+            //window.LeanPush.getInstallation(function (data) {
+            //    data = {
+            //        'deviceType': $scope.isiOS ? 'ios' : 'android'
+            //    };
+            //}, function (error) {
+            //    alert(error)
+            //});
+            //
+            //window.LeanPush.onNotificationReceived(function (data) {
+            //    console.log(JSON.stringify(data))
+            //});
 
             function backButton() {
                 if ($rootScope.backButtonPressedOnceToExit) {
