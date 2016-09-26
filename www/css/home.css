@@ -100,10 +100,16 @@
     margin: 3px
 }
 
-.home-position-test {
+.home-position-ios-test {
+    font-size: 18px;
+    float: right;
+    margin-top: 7px;
+}
+
+.home-position-android-test {
     font-size: 18px;
     position: fixed;
-    top: 13px;
+    top: 12px;
     left: 33px;
 }
 
