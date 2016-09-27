@@ -22,7 +22,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             $scope.takePhotoPosition = data.formattedAddress;
             $scope.currentProvince= data.addressComponent.province;
             $scope.currentAreaName = data.addressComponent.district;
-            $scope.$broadcast('currentProvince', $scope.currentProvince);
+            $scope.$broadcast('currentProvince', point);
             $ionicLoading.hide();
         });
 

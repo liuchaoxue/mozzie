@@ -19,6 +19,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
         showLoading();
         CurrentPosition.getPositionPoint(function (point, data) {
             $scope.currentPoint = point;
+            console.log(point)
             $scope.takePhotoPosition = data.formattedAddress;
             $scope.currentProvince= data.addressComponent.province;
             $scope.currentAreaName = data.addressComponent.district;
