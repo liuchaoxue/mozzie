@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-8-17.
  */
-appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService, localStorage, $http) {
+appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService, $cordovaToast, localStorage, $http) {
 
     var all = [];
     $scope.goToRiskAssessment = function () {
@@ -24,7 +24,7 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
         }
 
         if (all.length == 0) {
-            return alert("请选择症状")
+            return $cordovaToast.showShortCenter("请选择症状")
         }
 
         $http.post("https://leancloud.cn/1.1/functions/get_grade", postData, {

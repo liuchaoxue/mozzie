@@ -258,8 +258,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
 
     $scope.goToRiskAssessment = function () {
         if ($scope.isContainProvince) {
-            //return $cordovaToast.showShortCenter("暂时不支持该地区")
-            return alert($scope.isContainProvince)
+            return $cordovaToast.showShortCenter("暂时不支持该地区")
         }
         if ($scope.getLoginStatus()) {
             var query = {
