@@ -282,6 +282,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
                     $cordovaToast.showShortCenter("您还尚未上传过图片");
                 }
             });
+            return;
         }
         return $scope.getLoginStatus() ? JumpPagService.path("/riskAssessment") : JumpPagService.path("/login");
     };
