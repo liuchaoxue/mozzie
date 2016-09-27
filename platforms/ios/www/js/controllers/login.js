@@ -9,7 +9,6 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
     init();
 
     $scope.postSms = function (number) {
-        console.log(number)
         if (number == undefined || number == "") {
             return alert("号码为空");
         }
