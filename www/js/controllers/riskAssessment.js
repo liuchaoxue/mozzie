@@ -23,7 +23,7 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
             postData.family_disease = $scope.familySymptom;
         }
 
-        if (all.length == 0 || isFamily) {
+        if (all.length == 0) {
             return alert("请选择症状")
         }
 
