@@ -247,7 +247,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
 
     function getCityName() {
         var currentCity = localStorage.get("cityName");
-        var include = ["", "云南", "广西", "海南", "福建", "广东", "浙江", "上海"];//todo
+        var include = ["", "广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];//todo
         if (currentCity != null && include.indexOf(currentCity)) {
             $scope.isContainProvince = false;
         } else {

@@ -1,11 +1,11 @@
 /**
  * Created by liu on 16-7-22.
  */
-appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlideBoxDelegate, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
+appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlideBoxDelegate, $http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
 
-    $ionicModal.fromTemplateUrl('templates/maybeMozzieModal.html', {
+    $ionicModal.fromTemplateUrl("templates/maybeMozzieModal.html", {
         scope: $scope,
-        animation: 'slide-in-left', //modal弹出动画
+        animation: "slide-in-left", //modal弹出动画
         hardwareBackButtonClose: true
     }).then(function (modal) {
         $scope.modal = modal;
@@ -136,22 +136,22 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
                         var month = date.getMonth() + 1;
                         var hours = date.getHours();
                         if ((month == 12 || month == 1 || month == 2) && 18 >= hours >= 6) {
-                            $scope.cityName = cityName[i][$scope.currentProvince]["一季度"]['日'];
+                            $scope.cityName = cityName[i][$scope.currentProvince]["一季度"]["日"];
                         }
                         if ((month == 12 || month == 1 || month == 2) && hours <= 6 || hours >= 18) {
-                            $scope.cityName = cityName[i][$scope.currentProvince]["一季度"]['夜']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["一季度"]["夜"]
                         }
                         if ((month == 3 || month == 4 || month == 5) && hours >= 6 && hours <= 18) {
-                            $scope.cityName = cityName[i][$scope.currentProvince]["二季度"]['日']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["二季度"]["日"]
                         }
                         if ((month == 3 || month == 4 || month == 5) && hours <= 6 || hours >= 18) {
-                            $scope.cityName = cityName[i][$scope.currentProvince]["二季度"]['夜']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["二季度"]["夜"]
                         }
                         if ((month == 6 || month == 7 || month == 8) && hours >= 6 && hours <= 18) {
-                            $scope.cityName = cityName[i][$scope.currentProvince]["三季度"]['日']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["三季度"]["日"]
                         }
                         if ((month == 6 || month == 7 || month == 8) && hours <= 6 || hours >= 18) {
-                            $scope.cityName = cityName[i][$scope.currentProvince]["三季度"]['夜']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["三季度"]["夜"]
                         }
                         if (month == 9 || month == 10 || month == 11) {
                             $scope.cityName = {
@@ -199,7 +199,7 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
     };
 
     function setBuckButton(backButtonModal) {
-        $scope.$on('$destroy', function () {
+        $scope.$on("$destroy", function () {
             backButtonModal();
         });
         localStorage.removeItem("modal");
@@ -216,13 +216,24 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
         getCityName();
         postNewInfo();
         getNumberOfPeople();
-        $scope.isContainProvince = true;
+        $scope.isContainProvince = localStorage.get('isContainProvince');
+
+        if (localStorage.get('isContainProvince') === null) {
+            $scope.isContainProvince = true
+        }
     }
 
-    $scope.$on('currentProvince', function (event, data) {
-        if (cityName[data] != undefined) {
-            $scope.isContainProvince = false;
-        }
+    $scope.$on("currentProvince", function (event, data) {
+        $http.post("https://leancloud.cn/1.1/functions/is_available", {lat: data.latitude, lon: data.longitude}, {
+            headers: {
+                "Content-Type": "application/json",
+                "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+            }
+        }).success(function (data) {
+            localStorage.set('isContainProvince', !data.result.valid);
+            $scope.isContainProvince = !data.result.valid;
+        });
     });
 
     init();
@@ -235,10 +246,15 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
     }
 
     function getCityName() {
-        var currentCity = localStorage.get('cityName');
+        var currentCity = localStorage.get("cityName");
+        var include = ["", "广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];//todo
+        if (currentCity != null && include.indexOf(currentCity)) {
+            $scope.isContainProvince = false;
+        } else {
+            $scope.isContainProvince = true;
+        }
         if (currentCity) {
             $scope.currentProvince = currentCity;
-            localStorage.removeItem("cityName");
         }
     }
 
@@ -263,11 +279,14 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
             };
             LeanCloudClassService.findImg(query, function (data) {
                 if (data.length === 0) {
-                    alert("您还尚未上传过图片");
+                    $cordovaToast.showShortCenter("您还尚未上传过图片");
+                } else {
+                    JumpPagService.path("/riskAssessment");
                 }
             });
+        } else {
+            JumpPagService.path("/login")
         }
-        return $scope.getLoginStatus() ? JumpPagService.path("/riskAssessment") : JumpPagService.path("/login");
     };
 
     $scope.goToArticleList = function (type) {
@@ -276,8 +295,8 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
 
 
     function postNewInfo() {
-        //var appId = 'FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz';
-        //var appKey = 'Ronj9oBORrmjCDx2HdlhCwr3';
+        //var appId = "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz";
+        //var appKey = "Ronj9oBORrmjCDx2HdlhCwr3";
         //var push = AV.push({
         //    appId: appId,
         //    appKey: appKey
@@ -287,16 +306,16 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
         //    data: {LeanCloud: 123}
         //}, function (result) {
         //    if (result) {
-        //        console.log('推送成功发送');
+        //        console.log("推送成功发送");
         //    } else {
-        //        alert('error');
+        //        alert("error");
         //    }
         //});
     }
 
     $scope.takePhoto = function () {
         if ($scope.isContainProvince) {
-            return alert("暂时不支持该地区")
+            return $cordovaToast.showShortCenter("暂时不支持该地区")
         }
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
             JumpPagService.path("/takePicture");

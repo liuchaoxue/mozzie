@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-22.
  */
-appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, localStorage, $ionicLoading, $timeout, $cordovaToast) {
+appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, localStorage, $ionicLoading,$http, $timeout, $cordovaToast, $location) {
     function init() {
         //$scope.userName = localStorage.get("currentUser").username;
     }
@@ -14,11 +14,11 @@ appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, lo
     };
 
     $scope.feedback = function () {
-        window.location.href = "http://form.mikecrm.com/PvLdAS"
+      window.open("http://form.mikecrm.com/PvLdAS")
     };
 
     $scope.aboutUs = function () {
-        window.location.href = "http://www.chinacdc.cn/"
+        window.open("http://www.chinacdc.cn/")
     };
 
     $scope.clearCache = function () {

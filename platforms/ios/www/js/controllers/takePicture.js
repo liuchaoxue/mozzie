@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-27.
  */
-appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $filter, localStorage, LeanCloudClassService, JumpPagService) {
+appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $filter, localStorage, $cordovaToast, LeanCloudClassService, JumpPagService) {
 
     $scope.mosquitoPhotoShoot = function () {
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
@@ -48,7 +48,7 @@ appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $
 
     $scope.postImg = function () {
         if ($scope.currentPoint == undefined) {
-            return alert("请检查GPS是否开启")
+            return $cordovaToast.showShortCenter("请检查GPS是否开启")
         }
         LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
             localStorage.set("lastPage", "/takePicture");

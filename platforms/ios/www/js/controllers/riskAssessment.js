@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-8-17.
  */
-appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService, localStorage, $http) {
+appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService, $cordovaToast, localStorage, $http) {
 
     var all = [];
     $scope.goToRiskAssessment = function () {
@@ -11,10 +11,9 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
                 all.push(getName[i].defaultValue);
             }
         }
-
         var postData = {
-            "lat": 31.2304,
-            "lon": 121.4737,
+            "lat": $scope.currentPoint.latitude,
+            "lon": $scope.currentPoint.longitude,
             "time": new Date().toISOString(),
             "symptoms": all
         };
@@ -24,7 +23,7 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
         }
 
         if (all.length == 0) {
-            return alert("请选择症状")
+            return $cordovaToast.showShortCenter("请选择症状")
         }
 
         $http.post("https://leancloud.cn/1.1/functions/get_grade", postData, {
