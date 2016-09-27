@@ -218,7 +218,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
         getNumberOfPeople();
         $scope.isContainProvince = localStorage.get('isContainProvince');
 
-        if  (localStorage.get('isContainProvince')===null){
+        if (localStorage.get('isContainProvince') === null) {
             $scope.isContainProvince = true
         }
     }
@@ -231,7 +231,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
         }).success(function (data) {
-            localStorage.set('isContainProvince' ,!data.result.valid);
+            localStorage.set('isContainProvince', !data.result.valid);
             $scope.isContainProvince = !data.result.valid;
         });
     });
@@ -280,11 +280,13 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
             LeanCloudClassService.findImg(query, function (data) {
                 if (data.length === 0) {
                     $cordovaToast.showShortCenter("您还尚未上传过图片");
+                } else {
+                    JumpPagService.path("/riskAssessment");
                 }
             });
-            return;
+        } else {
+            JumpPagService.path("/login")
         }
-        return $scope.getLoginStatus() ? JumpPagService.path("/riskAssessment") : JumpPagService.path("/login");
     };
 
     $scope.goToArticleList = function (type) {
