@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-27.
  */
-appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $filter, localStorage,$cordovaToast, LeanCloudClassService, JumpPagService) {
+appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $filter, localStorage, $cordovaToast, LeanCloudClassService, JumpPagService) {
 
     $scope.mosquitoPhotoShoot = function () {
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
