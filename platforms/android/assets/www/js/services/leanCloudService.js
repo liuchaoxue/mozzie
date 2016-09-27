@@ -200,6 +200,7 @@ appServices
         function exitApp() {
             if ($rootScope.backButtonPressedOnceToExit) {
                 localStorage.removeItem("isContainProvince");
+                localStorage.removeItem("cityName");
                 ionic.Platform.exitApp();
             } else {
                 $rootScope.backButtonPressedOnceToExit = true;

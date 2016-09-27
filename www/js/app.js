@@ -34,6 +34,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
 
             function backButton() {
                 if ($rootScope.backButtonPressedOnceToExit) {
+                    localStorage.removeItem("cityName");
                     localStorage.removeItem("isContainProvince");
                     ionic.Platform.exitApp();
                 } else {

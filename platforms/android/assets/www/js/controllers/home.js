@@ -231,7 +231,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
         }).success(function (data) {
-            localStorage.set('isContainProvince' ,!data.result.valid)
+            localStorage.set('isContainProvince' ,!data.result.valid);
             $scope.isContainProvince = !data.result.valid;
         });
     });
@@ -255,7 +255,6 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
         }
         if (currentCity) {
             $scope.currentProvince = currentCity;
-            //localStorage.removeItem("cityName");
         }
     }
 
