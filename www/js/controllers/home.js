@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-22.
  */
-appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlideBoxDelegate,$http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
+appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlideBoxDelegate, $http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
 
     $ionicModal.fromTemplateUrl("templates/maybeMozzieModal.html", {
         scope: $scope,
@@ -241,7 +241,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
 
     function getCityName() {
         var currentCity = localStorage.get("cityName");
-        var include = ["广东", "云南", "广西", "海南", "福建", "浙江", "上海"];
+        var include = ["", "云南", "广西", "海南", "福建", "广东", "浙江", "上海"];//todo
         if (currentCity != null && include.indexOf(currentCity)) {
             $scope.isContainProvince = false;
         } else {
@@ -249,7 +249,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
         }
         if (currentCity) {
             $scope.currentProvince = currentCity;
-            localStorage.removeItem("cityName");
+            //localStorage.removeItem("cityName");
         }
     }
 
