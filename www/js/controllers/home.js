@@ -249,7 +249,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
         }
         if (currentCity) {
             $scope.currentProvince = currentCity;
-            //localStorage.removeItem("cityName");
+            localStorage.removeItem("cityName");
         }
     }
 

@@ -21,6 +21,10 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
         })
     };
 
+    $scope.goToHome = function () {
+        JumpPagService.path("/home")
+    };
+
     $scope.verify = function (num, phone) {
         var data = {mobilePhoneNumber: phone, smsCode: num};
         login(data)
