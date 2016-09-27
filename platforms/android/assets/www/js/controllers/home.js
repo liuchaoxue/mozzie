@@ -216,6 +216,11 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
         getCityName();
         postNewInfo();
         getNumberOfPeople();
+        $scope.isContainProvince = localStorage.get('isContainProvince');
+
+        if  (localStorage.get('isContainProvince')===null){
+            $scope.isContainProvince = true
+        }
     }
 
     $scope.$on("currentProvince", function (event, data) {
@@ -226,6 +231,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
         }).success(function (data) {
+            localStorage.set('isContainProvince' ,!data.result.valid)
             $scope.isContainProvince = !data.result.valid;
         });
     });
@@ -249,7 +255,7 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
         }
         if (currentCity) {
             $scope.currentProvince = currentCity;
-            localStorage.removeItem("cityName");
+            //localStorage.removeItem("cityName");
         }
     }
 

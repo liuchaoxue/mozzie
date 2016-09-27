@@ -196,9 +196,10 @@ appServices
                 return uuid;
             }
         }
-    }).factory('backButton', function ($rootScope, $cordovaToast, $ionicPlatform) {
+    }).factory('backButton', function ($rootScope, $cordovaToast, localStorage, $ionicPlatform) {
         function exitApp() {
             if ($rootScope.backButtonPressedOnceToExit) {
+                localStorage.removeItem("isContainProvince");
                 ionic.Platform.exitApp();
             } else {
                 $rootScope.backButtonPressedOnceToExit = true;
