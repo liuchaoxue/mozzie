@@ -131,27 +131,27 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
         if (localStorage.get("lastPage") == "/takePicture") {
             LeanCloudClassService.query("Insect", {}, function (data) {
                 for (var i = 0; i < cityName.length; i++) {
-                    if ($scope.currentcity in  cityName[i]) {
+                    if ($scope.currentProvince in  cityName[i]) {
                         var date = new Date();
                         var month = date.getMonth() + 1;
                         var hours = date.getHours();
                         if ((month == 12 || month == 1 || month == 2) && 18 >= hours >= 6) {
-                            $scope.cityName = cityName[i][$scope.currentcity]["一季度"]['日'];
+                            $scope.cityName = cityName[i][$scope.currentProvince]["一季度"]['日'];
                         }
                         if ((month == 12 || month == 1 || month == 2) && hours <= 6 || hours >= 18) {
-                            $scope.cityName = cityName[i][$scope.currentcity]["一季度"]['夜']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["一季度"]['夜']
                         }
                         if ((month == 3 || month == 4 || month == 5) && hours >= 6 && hours <= 18) {
-                            $scope.cityName = cityName[i][$scope.currentcity]["二季度"]['日']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["二季度"]['日']
                         }
                         if ((month == 3 || month == 4 || month == 5) && hours <= 6 || hours >= 18) {
-                            $scope.cityName = cityName[i][$scope.currentcity]["二季度"]['夜']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["二季度"]['夜']
                         }
                         if ((month == 6 || month == 7 || month == 8) && hours >= 6 && hours <= 18) {
-                            $scope.cityName = cityName[i][$scope.currentcity]["三季度"]['日']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["三季度"]['日']
                         }
                         if ((month == 6 || month == 7 || month == 8) && hours <= 6 || hours >= 18) {
-                            $scope.cityName = cityName[i][$scope.currentcity]["三季度"]['夜']
+                            $scope.cityName = cityName[i][$scope.currentProvince]["三季度"]['夜']
                         }
                         if (month == 9 || month == 10 || month == 11) {
                             $scope.cityName = {"单色库蚊": 80.00, "白纹伊蚊": 80.00, "三带喙库蚊": 80.00, "中华按蚊": 80.00, "致倦库蚊": 80.00};
@@ -224,7 +224,7 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
     function getCityName() {
         var currentCity = localStorage.get('cityName');
         if (currentCity) {
-            $scope.currentcity = currentCity;
+            $scope.currentProvince = currentCity;
             localStorage.removeItem("cityName");
         }
     }

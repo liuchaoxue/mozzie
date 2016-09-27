@@ -21,7 +21,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
         CurrentPosition.getPositionPoint(function (point, data) {
             $scope.currentPoint = point;
             $scope.takePhotoPosition = data.formattedAddress;
-            $scope.currentcity = data.addressComponent.city;
+            $scope.currentProvince= data.addressComponent.province;
             $scope.currentAreaName = data.addressComponent.district;
             $ionicLoading.hide();
         });
