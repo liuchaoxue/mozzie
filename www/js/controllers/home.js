@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-22.
  */
-appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlideBoxDelegate, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
+appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlideBoxDelegate,$http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
 
     $ionicModal.fromTemplateUrl("templates/maybeMozzieModal.html", {
         scope: $scope,
@@ -219,9 +219,16 @@ appControllers.controller("homeCtrl", function ($scope, $ionicModal, $ionicSlide
     }
 
     $scope.$on("currentProvince", function (event, data) {
-        if (cityName[data] != undefined) {
-            $scope.isContainProvince = false;
-        }
+        $http.post("https://leancloud.cn/1.1/functions/is_available", {lat: data.latitude, lon: data.longitude}, {
+            headers: {
+                "Content-Type": "application/json",
+                "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+            }
+        }).success(function (data) {
+            console.log(data.result.valid)
+            $scope.isContainProvince = data.result.valid;
+        });
     });
 
     init();
