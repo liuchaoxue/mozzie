@@ -4,9 +4,10 @@ var appDirectives = angular.module('app.directives', []);
 
 appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService, JumpPagService, $ionicLoading) {
 
-
     $scope.getPosition = function () {
-        CurrentPosition.getPositionPoint($scope.isAndroid, function (point, data) {
+        CurrentPosition.getPositionPoint().then(function (result) {
+            var point = result.point;
+            var data = result.data;
             $scope.currentPoint = point;
             $scope.takePhotoPosition = data.formattedAddress;
             $scope.currentProvince = data.addressComponent.province;
@@ -40,12 +41,12 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
     }
 
     function init() {
-        getUserImg();
-        $scope.getPosition();
-
         var userAgent = navigator.userAgent;
         $scope.isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
         $scope.isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;
+        getUserImg();
+        $scope.getPosition();
+
         $scope.totalFamilySymptom = ["登革热", "基孔肯雅热", "寨卡病毒病", "黄热病", "流行性乙型脑炎", "疟疾"];
         $scope.modalHide = true;
     }

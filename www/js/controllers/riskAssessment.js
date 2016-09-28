@@ -17,8 +17,7 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
             "time": new Date().toISOString(),
             "symptoms": all
         };
-        var isFamily = $scope.familySymptom != undefined && $scope.familySymptom != "";
-        if (isFamily) {
+        if ($scope.familySymptom != undefined && $scope.familySymptom != "") {
             postData.family_disease = $scope.familySymptom;
         }
 
@@ -33,8 +32,6 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
         }).success(function (data) {
-            console.log(data.result);
-            console.log(postData);
             localStorage.set("postData", data.result.risk_rate);
             JumpPagService.path("/assessmentResults");
         });

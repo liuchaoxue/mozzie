@@ -101,13 +101,13 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     function getCityName() {
         var currentCity = localStorage.get("cityName");
         var include = ["", "广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];//todo
-        if (currentCity != null && include.indexOf(currentCity)) {
+        if (currentCity != null && include.indexOf(currentCity.name)) {
             $scope.isContainProvince = false;
         } else {
             $scope.isContainProvince = true;
         }
         if (currentCity) {
-            $scope.currentProvince = currentCity;
+            $scope.currentProvince = currentCity.name;
         }
     }
 
