@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-21.
  */
-appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, $cordovaToast, JumpPagService, $interval, localStorage) {
+appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, JumpPagService, $interval, localStorage) {
     function init() {
         $scope.verificationButtonText = "获取验证码";
     }
@@ -9,8 +9,9 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
     init();
 
     $scope.postSms = function (number) {
+        console.log(number)
         if (number == undefined || number == "") {
-            return $cordovaToast.showShortCenter("号码为空");
+            return alert("号码为空");
         }
         var userData = {
             mobilePhoneNumber: number,
@@ -19,10 +20,6 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
         LeanCloudLoginService.smsVerification(userData, function () {
             $scope.showtime(60);
         })
-    };
-
-    $scope.goToHome = function () {
-        JumpPagService.path("/home")
     };
 
     $scope.verify = function (num, phone) {

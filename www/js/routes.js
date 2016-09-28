@@ -45,7 +45,10 @@ angular.module('app.routes', [])
                 url: '/home',
                 templateUrl: 'templates/home.html',
                 cache: 'false',
-                controller: 'homeCtrl'
+                controller: 'homeCtrl',
+                params: {
+                    openInsects123: false
+                }
             })
 
             .state('takePicture', {

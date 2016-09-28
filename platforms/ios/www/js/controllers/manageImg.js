@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-8-25.
  */
-appControllers.controller('manageImgCtrl', function ($scope, $cordovaToast, LeanCloudClassService, $stateParams, $state) {
+appControllers.controller('manageImgCtrl', function ($scope, LeanCloudClassService, $stateParams, $state) {
 
     function init() {
         getImgInfo();
@@ -16,7 +16,7 @@ appControllers.controller('manageImgCtrl', function ($scope, $cordovaToast, Lean
         LeanCloudClassService.findImg(query, function (data) {
             if (data.length === 0) {
                 $state.go("manage");
-                $cordovaToast.showShortCenter("该用户尚未发表图片");
+                alert("该用户尚未发表图片");
             }
             $scope.userImgInfo = data;
         });
@@ -27,7 +27,7 @@ appControllers.controller('manageImgCtrl', function ($scope, $cordovaToast, Lean
     $scope.deleteImg = function (id) {
         LeanCloudClassService.delete("CameraPosition", id, function (data) {
             getImgInfo();
-            $cordovaToast.showShortCenter("已删除");
+            alert("已删除");
         })
     };
 });

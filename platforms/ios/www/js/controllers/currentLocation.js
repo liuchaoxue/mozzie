@@ -3,7 +3,7 @@
  */
 appControllers.controller('currentLocationCtrl', function ($scope, JumpPagService, localStorage) {
     function init() {
-        $scope.cityName = ["广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];
+        $scope.cityName = ["广东", "云南", "广西", "海南", "福建", "浙江", "上海"];
     }
 
     init();

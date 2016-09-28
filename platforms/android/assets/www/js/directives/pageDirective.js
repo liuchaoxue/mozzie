@@ -46,21 +46,27 @@ appDirectives.directive("notLoginPage", function () {
 
             init();
 
-            function getOpts() {
+            function getOpts(color) {
                 return {
                     lines: 120,
                     angle: 0.3,
                     lineWidth: 0.10,
                     limitMax: 'false',
-                    colorStart: '#f7a84c',
-                    colorStop: '#f7a84c',
+                    colorStart: color,
+                    colorStop: color,
                     strokeColor: '#8ae7ee',
-                    generateGradient: false
+                    generateGradient: true
                 };
             }
 
             function initDonut(imgHeight, textHeight) {
-                var demoGauge = new Donut(imgHeight).setOptions(getOpts());
+                var color = "green";
+                if (0 < localStorage.get("postData") && localStorage.get("postData") <= 50) {
+                    color = "orange";
+                } else if (50 < localStorage.get("postData") && localStorage.get("postData") <= 100) {
+                    color = "red"
+                }
+                var demoGauge = new Donut(imgHeight).setOptions(getOpts(color));
                 demoGauge.setTextField(textHeight);
                 demoGauge.maxValue = 100;
                 demoGauge.animationSpeed = 5;

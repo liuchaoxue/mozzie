@@ -3,7 +3,7 @@
  */
 appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, localStorage, $ionicLoading,$http, $timeout, $cordovaToast, $location) {
     function init() {
-        //$scope.userName = localStorage.get("currentUser").username;
+        $scope.userName = localStorage.get("currentUser").username;
     }
 
     init();

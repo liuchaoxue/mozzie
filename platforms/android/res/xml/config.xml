@@ -40,7 +40,7 @@
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
-    <name>蚊子包</name>
+    <name>蚊子叮</name>
     <description>
         An Ionic Framework and Cordova project.
     </description>

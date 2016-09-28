@@ -16,7 +16,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
     }
 
     $scope.getPosition = function () {
-        showLoading();
+        // showLoading();
         CurrentPosition.getPositionPoint(function (point, data) {
             $scope.currentPoint = point;
             $scope.takePhotoPosition = data.formattedAddress;

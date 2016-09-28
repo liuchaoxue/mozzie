@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-27.
  */
-appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $filter, localStorage, $cordovaToast, LeanCloudClassService, JumpPagService) {
+appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cordovaCamera, $filter, localStorage, $cordovaToast, LeanCloudClassService, JumpPagService) {
 
     $scope.mosquitoPhotoShoot = function () {
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
@@ -19,6 +19,7 @@ appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $
 
     function init() {
         $scope.takePhotoTime = $filter('date')(new Date(), "HH:mm yyyy/MM/dd");
+        $scope.takePhotoTimeISO = new Date().toISOString();
         $scope.imgURL = localStorage.get("imgURL");
     }
 
@@ -51,7 +52,16 @@ appControllers.controller('takePictureCtrl', function ($scope, $cordovaCamera, $
             return $cordovaToast.showShortCenter("请检查GPS是否开启")
         }
         LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
-            localStorage.set("lastPage", "/takePicture");
+            // localStorage.set("lastPage", "/takePicture");
+            localStorage.set("showMozzinfo", true);
+            localStorage.set("lastPicture", {
+                imgPosition: $scope.takePhotoPosition,
+                imgCoordinate: {
+                    "latitude": $scope.currentPoint.latitude,
+                    "longitude": $scope.currentPoint.longitude
+                },
+                takePhotoTimeISO: $scope.takePhotoTimeISO
+            });
             JumpPagService.path("/home");
         });
     }

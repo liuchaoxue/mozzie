@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-8-25.
  */
-appControllers.controller('manageCtrl', function ($scope, LeanCloudClassService, $cordovaToast, $state, localStorage, $ionicScrollDelegate, $window) {
+appControllers.controller('manageCtrl', function ($scope, LeanCloudClassService, $state, localStorage, $ionicScrollDelegate, $window) {
 
     function getTotalUser() {
         LeanCloudClassService.query("_User", {where: {objectId: {$nin: [localStorage.get("currentUser").objectId]}}}, function (data) {
@@ -31,7 +31,7 @@ appControllers.controller('manageCtrl', function ($scope, LeanCloudClassService,
     $scope.deleteImg = function (id) {
         LeanCloudClassService.delete("CameraPosition", id, function (data) {
             $window.location.reload();
-            $cordovaToast.showShortCenter("已删除");
+            alert("已删除");
         })
     };
 
