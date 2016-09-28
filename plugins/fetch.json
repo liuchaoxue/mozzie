@@ -125,5 +125,16 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.hewz.plugins.baidu.location": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hewz/cordova-baidu-location",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {
+            "API_KEY": "VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK"
+        }
     }
 }

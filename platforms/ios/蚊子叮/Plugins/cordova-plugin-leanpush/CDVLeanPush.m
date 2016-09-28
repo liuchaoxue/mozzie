@@ -69,7 +69,6 @@
         NSString *responseString =[NSString stringWithFormat:@"ios,%@,%@", currentInstallation.objectId,currentInstallation.deviceToken];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:responseString];
     } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Fail to get Installation."];
     }
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];

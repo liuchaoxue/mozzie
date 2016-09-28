@@ -9,8 +9,8 @@
 
 
 <div class="pb28">
-    <div class="item ic-selected risk-symptom-choose" ng-repeat="x in symptomTotal">
-        <label>
+    <div ng-repeat="x in symptomTotal">
+        <label class="item ic-selected risk-symptom-choose">
             <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle padding0">
                 <input type="checkbox" name="box" value="{{x}}">
                 <i class="checkbox-icon fl"></i>

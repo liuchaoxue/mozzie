@@ -17,15 +17,22 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
 
     $scope.getPosition = function () {
         // showLoading();
-        CurrentPosition.getPositionPoint(function (point, data) {
-            $scope.currentPoint = point;
-            $scope.takePhotoPosition = data.formattedAddress;
-            $scope.currentProvince= data.addressComponent.province;
-            $scope.currentAreaName = data.addressComponent.district;
-            $scope.$broadcast('currentProvince', point);
-            $ionicLoading.hide();
-        });
-
+        if ($scope.isAndroid) {
+            baidu_location.getCurrentPosition(function (position) {
+                alert(JSON.stringify(position));
+            }, function (err) {
+                alert(JSON.stringify(err));
+            });
+        } else {
+            CurrentPosition.getPositionPoint($scope.isAndroid,function (point, data) {
+                $scope.currentPoint = point;
+                $scope.takePhotoPosition = data.formattedAddress;
+                $scope.currentProvince = data.addressComponent.province;
+                $scope.currentAreaName = data.addressComponent.district;
+                $scope.$broadcast('currentProvince', point);
+                $ionicLoading.hide();
+            });
+        }
     };
 
     $scope.showSymptom = function () {

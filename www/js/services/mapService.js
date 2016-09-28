@@ -4,7 +4,9 @@
 appServices
     .factory("CurrentPosition", function ($ionicLoading, $cordovaGeolocation) {
         return {
-            getPositionPoint: function (cb) {
+            getPositionPoint: function (isAndroid, cb) {
+
+
                 var posOptions = {timeout: 10000, enableHighAccuracy: false};
                 $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
                     AMap.service('AMap.Geocoder', function () {

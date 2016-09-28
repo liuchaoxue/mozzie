@@ -39,6 +39,10 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        },
+        "com.hewz.plugins.baidu.location": {
+            "API_KEY": "VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK",
+            "PACKAGE_NAME": "com.ionicframework.starter"
         }
     },
     "dependent_plugins": {

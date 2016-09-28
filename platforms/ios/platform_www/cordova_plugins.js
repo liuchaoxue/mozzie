@@ -322,6 +322,23 @@ module.exports = [
         "clobbers": [
             "Connection"
         ]
+    },
+    {
+        "file": "plugins/com.hewz.plugins.baidu.location/www/baidu_location.js",
+        "id": "com.hewz.plugins.baidu.location.baidu_location",
+        "pluginId": "com.hewz.plugins.baidu.location",
+        "clobbers": [
+            "baidu_location"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -338,7 +355,9 @@ module.exports.metadata =
     "cordova-plugin-file": "4.2.0",
     "cordova-plugin-leanpush": "0.3.4",
     "cordova-plugin-x-toast": "2.5.2",
-    "cordova-plugin-network-information": "1.3.0"
+    "cordova-plugin-network-information": "1.3.0",
+    "com.hewz.plugins.baidu.location": "1.0.0",
+    "cordova-plugin-inappbrowser": "1.5.0"
 }
 // BOTTOM OF METADATA
 });

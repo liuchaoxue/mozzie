@@ -1,24 +1,39 @@
 /**
  * Created by liu on 16-7-22.
  */
-appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlideBoxDelegate, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
+appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal, $stateParams, $ionicSlideBoxDelegate, $http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
 
-    $ionicModal.fromTemplateUrl('templates/maybeMozzieModal.html', {
-        scope: $scope,
-        animation: 'slide-in-left', //modal弹出动画
-        hardwareBackButtonClose: true
-    }).then(function (modal) {
-        $scope.modal = modal;
-        getMozzieImg();
-    });
-
-    function getMozzieImg() {
-        if (localStorage.get("lastPage") == "/takePicture") {
-            LeanCloudClassService.query("Insect", {}, function (data) {
-                $scope.mozzieInfo = data;
+    $scope.showMozzinfo = function () {
+        $ionicModal.fromTemplateUrl("templates/maybeMozzieModal.html", {
+            scope: $scope,
+            animation: "slide-in-left", //modal弹出动画
+            hardwareBackButtonClose: true
+        }).then(function (modal) {
+            $scope.modal = modal;
+            var lastPicture = localStorage.get('lastPicture');
+            $http.post("https://leancloud.cn/1.1/functions/insect_statistic", {
+                lat: lastPicture.imgCoordinate.latitude,
+                lon: lastPicture.imgCoordinate.longitude,
+                time: lastPicture.takePhotoTimeISO
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                    "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+                }
+            }).success(function (data) {
+                $scope.mozzieInfo = data.result.insects;
+                $scope.imgUrl = localStorage.get("imgURL");
+                $scope.modal.show();
+            }).error(function (err) {
+                return $cordovaToast.showShortCenter("上传失败");
             });
-            $scope.imgUrl = localStorage.get("imgURL");
-        }
+
+        });
+    };
+    if (localStorage.get("showMozzinfo") == true) {
+        $scope.showMozzinfo();
+        localStorage.set("showMozzinfo", false);
     }
 
     $scope.showModal = function () {
@@ -38,7 +53,7 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
     };
 
     function setBuckButton(backButtonModal) {
-        $scope.$on('$destroy', function () {
+        $scope.$on("$destroy", function () {
             backButtonModal();
         });
         localStorage.removeItem("modal");
@@ -46,16 +61,33 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
 
     function init() {
         var backButtonModal = backButton.modal(isModalShow, function () {
-            $scope.modal.remove();
+            // $scope.modal.remove();
             setBuckButton(backButtonModal);
         });
         setBuckButton(backButtonModal);
 
-
         getCityName();
         postNewInfo();
         getNumberOfPeople();
+        $scope.isContainProvince = localStorage.get('isContainProvince');
+
+        if (localStorage.get('isContainProvince') === null) {
+            $scope.isContainProvince = true
+        }
     }
+
+    $scope.$on("currentProvince", function (event, data) {
+        $http.post("https://leancloud.cn/1.1/functions/is_available", {lat: data.latitude, lon: data.longitude}, {
+            headers: {
+                "Content-Type": "application/json",
+                "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+            }
+        }).success(function (data) {
+            localStorage.set('isContainProvince', !data.result.valid);
+            $scope.isContainProvince = !data.result.valid;
+        });
+    });
 
     init();
 
@@ -67,16 +99,22 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
     }
 
     function getCityName() {
-        var currentCity = localStorage.get('cityName');
+        var currentCity = localStorage.get("cityName");
+        var include = ["", "广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];//todo
+        if (currentCity != null && include.indexOf(currentCity)) {
+            $scope.isContainProvince = false;
+        } else {
+            $scope.isContainProvince = true;
+        }
         if (currentCity) {
-            $scope.currentcity = currentCity;
-            localStorage.removeItem("cityName");
+            $scope.currentProvince = currentCity;
         }
     }
 
 
     $scope.goToUserCenter = function () {
         return $scope.getLoginStatus() ? JumpPagService.path("/userCenter") : JumpPagService.path("/login");
+        // return $scope.getLoginStatus() ? $state.go("userCenter") : $state.go("login");
     };
 
     $scope.goToCurrentLocation = function () {
@@ -84,7 +122,26 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
     };
 
     $scope.goToRiskAssessment = function () {
-        return $scope.getLoginStatus() ? JumpPagService.path("/riskAssessment") : JumpPagService.path("/login");
+        if ($scope.isContainProvince) {
+            return $cordovaToast.showShortCenter("暂时不支持该地区")
+        }
+        if ($scope.getLoginStatus()) {
+            var query = {
+                "__type": "Pointer",
+                "className": "_User",
+                "objectId": localStorage.get("currentUser").objectId
+            };
+            LeanCloudClassService.findImg(query, function (data) {
+                if (data.length === 0) {
+                    $cordovaToast.showShortCenter("您还尚未上传过图片");
+                } else {
+                    console.log(data)
+                    //JumpPagService.path("/riskAssessment");
+                }
+            });
+        } else {
+            JumpPagService.path("/login")
+        }
     };
 
     $scope.goToArticleList = function (type) {
@@ -93,8 +150,8 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
 
 
     function postNewInfo() {
-        //var appId = 'FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz';
-        //var appKey = 'Ronj9oBORrmjCDx2HdlhCwr3';
+        //var appId = "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz";
+        //var appKey = "Ronj9oBORrmjCDx2HdlhCwr3";
         //var push = AV.push({
         //    appId: appId,
         //    appKey: appKey
@@ -104,14 +161,17 @@ appControllers.controller('homeCtrl', function ($scope, $ionicModal, $ionicSlide
         //    data: {LeanCloud: 123}
         //}, function (result) {
         //    if (result) {
-        //        console.log('推送成功发送');
+        //        console.log("推送成功发送");
         //    } else {
-        //        alert('error');
+        //        alert("error");
         //    }
         //});
     }
 
     $scope.takePhoto = function () {
+        if ($scope.isContainProvince) {
+            return $cordovaToast.showShortCenter("暂时不支持该地区")
+        }
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
             JumpPagService.path("/takePicture");
             localStorage.set("imgURL", "data:image/jpeg;base64," + imageData);

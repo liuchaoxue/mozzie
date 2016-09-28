@@ -297,6 +297,14 @@ module.exports = [
             "cordova.InAppBrowser.open",
             "window.open"
         ]
+    },
+    {
+        "id": "com.hewz.plugins.baidu.location.baidu_location",
+        "file": "plugins/com.hewz.plugins.baidu.location/www/baidu_location.js",
+        "pluginId": "com.hewz.plugins.baidu.location",
+        "clobbers": [
+            "baidu_location"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -314,7 +322,8 @@ module.exports.metadata =
     "cordova-plugin-x-toast": "2.5.2",
     "cordova-plugin-wechat": "1.2.0",
     "cordova-plugin-network-information": "1.3.0",
-    "cordova-plugin-inappbrowser": "1.5.0"
+    "cordova-plugin-inappbrowser": "1.5.0",
+    "com.hewz.plugins.baidu.location": "1.0.0"
 };
 // BOTTOM OF METADATA
 });

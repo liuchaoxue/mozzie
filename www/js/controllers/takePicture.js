@@ -49,7 +49,7 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
 
     $scope.postImg = function () {
         if ($scope.currentPoint == undefined) {
-            //return $cordovaToast.showShortCenter("请检查GPS是否开启")
+            return $cordovaToast.showShortCenter("请检查GPS是否开启")
         }
         LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
             // localStorage.set("lastPage", "/takePicture");
