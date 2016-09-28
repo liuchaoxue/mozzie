@@ -25,10 +25,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 $scope.mozzieInfo = data.result.insects;
                 $scope.imgUrl = localStorage.get("imgURL");
                 $scope.modal.show();
+            }).error(function (err) {
+                return $cordovaToast.showShortCenter("上传失败");
             });
 
         });
-    }
+    };
     if (localStorage.get("showMozzinfo") == true) {
         $scope.showMozzinfo();
         localStorage.set("showMozzinfo", false);
