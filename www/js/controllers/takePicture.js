@@ -53,12 +53,13 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
         }
         LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
             // localStorage.set("lastPage", "/takePicture");
+            var point = localStorage.get("userChosePoint");
             localStorage.set("showMozzinfo", true);
             localStorage.set("lastPicture", {
                 imgPosition: $scope.takePhotoPosition,
                 imgCoordinate: {
-                    "latitude": $scope.currentPoint.latitude,
-                    "longitude": $scope.currentPoint.longitude
+                    "latitude": point.latitude,
+                    "longitude": point.longitude
                 },
                 takePhotoTimeISO: $scope.takePhotoTimeISO
             });

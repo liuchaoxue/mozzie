@@ -11,9 +11,10 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
                 all.push(getName[i].defaultValue);
             }
         }
+        var point = localStorage.get("userChosePoint");
         var postData = {
-            "lat": $scope.currentPoint.latitude,
-            "lon": $scope.currentPoint.longitude,
+            "lat": point.latitude,
+            "lon": point.longitude,
             "time": new Date().toISOString(),
             "symptoms": all
         };

@@ -83,9 +83,9 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
-        }).success(function (data) {
-            localStorage.set('isContainProvince', !data.result.valid);
-            $scope.isContainProvince = !data.result.valid;
+        }).success(function (is) {
+            localStorage.set('isContainProvince', !is.result.valid);
+            $scope.isContainProvince = !is.result.valid;
         });
     });
 
