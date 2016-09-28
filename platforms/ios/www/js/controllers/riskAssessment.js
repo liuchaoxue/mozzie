@@ -11,14 +11,14 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
                 all.push(getName[i].defaultValue);
             }
         }
+        var point = localStorage.get("userChosePoint");
         var postData = {
-            "lat": $scope.currentPoint.latitude,
-            "lon": $scope.currentPoint.longitude,
+            "lat": point.latitude,
+            "lon": point.longitude,
             "time": new Date().toISOString(),
             "symptoms": all
         };
-        var isFamily = $scope.familySymptom != undefined && $scope.familySymptom != "";
-        if (isFamily) {
+        if ($scope.familySymptom != undefined && $scope.familySymptom != "") {
             postData.family_disease = $scope.familySymptom;
         }
 
@@ -33,8 +33,6 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
         }).success(function (data) {
-            console.log(data.result);
-            console.log(postData);
             localStorage.set("postData", data.result.risk_rate);
             JumpPagService.path("/assessmentResults");
         });

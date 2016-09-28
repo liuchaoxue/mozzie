@@ -8,11 +8,20 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
     })
 
     .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage) {
-        $ionicPlatform.ready(function () {
-            if (window.cordova && window.cordova.InAppBrowser) {
-                window.open = window.cordova.InAppBrowser.open;
-            }
 
+        var isNet = onlinenetwork({
+            "time": 1000,
+            "url": ""
+        });
+
+        isNet.onLineHandler(function () {
+        });
+
+        isNet.offLineHandler(function () {
+            $cordovaToast.showShortCenter("网络不给力")
+        });
+
+        $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);

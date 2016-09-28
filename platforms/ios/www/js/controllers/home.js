@@ -83,9 +83,9 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
-        }).success(function (data) {
-            localStorage.set('isContainProvince', !data.result.valid);
-            $scope.isContainProvince = !data.result.valid;
+        }).success(function (is) {
+            localStorage.set('isContainProvince', !is.result.valid);
+            $scope.isContainProvince = !is.result.valid;
         });
     });
 
@@ -101,13 +101,13 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     function getCityName() {
         var currentCity = localStorage.get("cityName");
         var include = ["", "广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];//todo
-        if (currentCity != null && include.indexOf(currentCity)) {
+        if (currentCity != null && include.indexOf(currentCity.name)) {
             $scope.isContainProvince = false;
         } else {
             $scope.isContainProvince = true;
         }
         if (currentCity) {
-            $scope.currentProvince = currentCity;
+            $scope.currentProvince = currentCity.name;
         }
     }
 
@@ -135,8 +135,8 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 if (data.length === 0) {
                     $cordovaToast.showShortCenter("您还尚未上传过图片");
                 } else {
-                    console.log(data)
-                    //JumpPagService.path("/riskAssessment");
+                    localStorage.set("lastPicture", {takePhotoTimeISO: data[0].createdAt});
+                    JumpPagService.path("/riskAssessment");
                 }
             });
         } else {

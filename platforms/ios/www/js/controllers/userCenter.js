@@ -14,11 +14,11 @@ appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, lo
     };
 
     $scope.feedback = function () {
-      window.open("http://form.mikecrm.com/PvLdAS")
+        cordova.InAppBrowser.open('http://form.mikecrm.com/PvLdAS', '_blank', 'location=no,toolbar=yes,toolbarposition=top,closebuttoncaption=关闭');
     };
 
     $scope.aboutUs = function () {
-        window.open("http://www.chinacdc.cn/")
+        cordova.InAppBrowser.open('http://www.chinacdc.cn/', '_blank', 'location=no,toolbar=yes,toolbarposition=top,closebuttoncaption=关闭');
     };
 
     $scope.clearCache = function () {
