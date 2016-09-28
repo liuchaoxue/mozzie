@@ -6,7 +6,8 @@ appDirectives
         return {
             controller: function ($element, localStorage, $scope) {
                 var map = new BMap.Map("allmap");
-                var mapPoint = new BMap.Point($scope.currentPoint.longitude, $scope.currentPoint.latitude);
+                //var mapPoint = new BMap.Point($scope.currentPoint.longitude, $scope.currentPoint.latitude);
+                var mapPoint = new BMap.Point(114.539059999, 38.036654);
                 map.centerAndZoom(mapPoint, 16);
 
                 var getAddressInfo = function () {
