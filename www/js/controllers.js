@@ -5,34 +5,14 @@ var appDirectives = angular.module('app.directives', []);
 appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService, JumpPagService, $ionicLoading) {
 
 
-    function showLoading() {
-        $ionicLoading.show({
-            content: 'Loading',
-            animation: 'fade-in',
-            showBackdrop: true,
-            maxWidth: 200,
-            showDelay: 0
-        });
-    }
-
     $scope.getPosition = function () {
-        // showLoading();
-        if ($scope.isAndroid) {
-            baidu_location.getCurrentPosition(function (position) {
-                alert(JSON.stringify(position));
-            }, function (err) {
-                alert(JSON.stringify(err));
-            });
-        } else {
-            CurrentPosition.getPositionPoint($scope.isAndroid,function (point, data) {
-                $scope.currentPoint = point;
-                $scope.takePhotoPosition = data.formattedAddress;
-                $scope.currentProvince = data.addressComponent.province;
-                $scope.currentAreaName = data.addressComponent.district;
-                $scope.$broadcast('currentProvince', point);
-                $ionicLoading.hide();
-            });
-        }
+        CurrentPosition.getPositionPoint($scope.isAndroid, function (point, data) {
+            $scope.currentPoint = point;
+            $scope.takePhotoPosition = data.formattedAddress;
+            $scope.currentProvince = data.addressComponent.province;
+            $scope.currentAreaName = data.addressComponent.district;
+            $scope.$broadcast('currentProvince', point);
+        });
     };
 
     $scope.showSymptom = function () {

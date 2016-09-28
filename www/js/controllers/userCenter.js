@@ -3,7 +3,7 @@
  */
 appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, localStorage, $ionicLoading,$http, $timeout, $cordovaToast, $location) {
     function init() {
-        //$scope.userName = localStorage.get("currentUser").username;
+        $scope.userName = localStorage.get("currentUser").username;
     }
 
     init();
@@ -15,11 +15,9 @@ appControllers.controller('userCenterCtrl', function ($scope, JumpPagService, lo
 
     $scope.feedback = function () {
         cordova.InAppBrowser.open('http://form.mikecrm.com/PvLdAS', '_blank', 'location=no,toolbar=yes,toolbarposition=top,closebuttoncaption=关闭');
-        //window.open("http://form.mikecrm.com/PvLdAS")
     };
 
     $scope.aboutUs = function () {
-        //window.open("http://www.chinacdc.cn/")
         cordova.InAppBrowser.open('http://www.chinacdc.cn/', '_blank', 'location=no,toolbar=yes,toolbarposition=top,closebuttoncaption=关闭');
     };
 

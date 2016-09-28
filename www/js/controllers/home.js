@@ -135,8 +135,8 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 if (data.length === 0) {
                     $cordovaToast.showShortCenter("您还尚未上传过图片");
                 } else {
-                    console.log(data)
-                    //JumpPagService.path("/riskAssessment");
+                    localStorage.set("lastPicture", {takePhotoTimeISO: data[0].createdAt});
+                    JumpPagService.path("/riskAssessment");
                 }
             });
         } else {

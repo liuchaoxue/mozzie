@@ -9,10 +9,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
 
     .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage) {
         $ionicPlatform.ready(function () {
-            //if (window.cordova && window.cordova.InAppBrowser) {
-            //    window.open = window.cordova.InAppBrowser.open;
-            //}
-
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
