@@ -43,6 +43,9 @@
         "com.hewz.plugins.baidu.location": {
             "API_KEY": "VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK",
             "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova.plugins.diagnostic": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
         }
     },
     "dependent_plugins": {

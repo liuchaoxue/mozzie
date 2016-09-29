@@ -339,6 +339,14 @@ module.exports = [
             "cordova.InAppBrowser.open",
             "window.open"
         ]
+    },
+    {
+        "file": "plugins/cordova.plugins.diagnostic/www/ios/diagnostic.js",
+        "id": "cordova.plugins.diagnostic.Diagnostic",
+        "pluginId": "cordova.plugins.diagnostic",
+        "clobbers": [
+            "cordova.plugins.diagnostic"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -357,7 +365,8 @@ module.exports.metadata =
     "cordova-plugin-x-toast": "2.5.2",
     "cordova-plugin-network-information": "1.3.0",
     "com.hewz.plugins.baidu.location": "1.0.0",
-    "cordova-plugin-inappbrowser": "1.5.0"
+    "cordova-plugin-inappbrowser": "1.5.0",
+    "cordova.plugins.diagnostic": "3.2.1"
 }
 // BOTTOM OF METADATA
 });

@@ -8,6 +8,10 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
 
     init();
 
+    $scope.changeColor = function () {
+        document.getElementsByClassName("login-verification-button")[0].style.background = "#51addc";
+    };
+
     $scope.postSms = function (number) {
         if (number == undefined || number == "") {
             return $cordovaToast.showShortCenter("号码为空");
@@ -47,9 +51,11 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
         $scope.showTime = true;
         $interval(function () {
             if (time == 0) {
+                document.getElementById("sms").style.background = "#d9d9d9";
                 $scope.verificationButtonText = "重发验证码";
                 $scope.showTime = false;
             } else {
+                document.getElementById("sms").style.background = "#ebebeb";
                 time--;
                 $scope.verificationButtonText = time + "s后重发";
             }

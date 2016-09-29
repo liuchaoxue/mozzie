@@ -10,11 +10,11 @@
         <div class="item item-input item-stacked-label login-input-fl login-item-p">
             <input type="tel" class="fs16" ng-model="verifyNum" placeholder="请输入获取到的验证码">
         </div>
-        <button ng-click="postSms(phoneNumber);" class="login-input-fr userCenter-bc ta-c"
+        <button ng-click="postSms(phoneNumber);" class="login-input-fr ta-c" id="sms"
                 ng-disabled="showTime"
                 ng-bind="verificationButtonText"></button>
     </div>
-    <a ng-click="verify(verifyNum,phoneNumber)" ng-disabled="!verifyNum || !phoneNumber"
+    <a ng-click="verify(verifyNum,phoneNumber)" ng-disabled="!verifyNum || !phoneNumber?true:changeColor()"
        class="login-verification-button white button button-block ">验证身份</a>
 </form>
 <div class="login-text">

@@ -23,7 +23,8 @@
     "cordova-plugin-file",
     "cordova-plugin-wechat",
     "cordova-plugin-network-information",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova.plugins.diagnostic"
   ],
   "cordovaPlatforms": [
     "ios"

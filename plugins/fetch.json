@@ -136,5 +136,13 @@
         "variables": {
             "API_KEY": "VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK"
         }
+    },
+    "cordova.plugins.diagnostic": {
+        "source": {
+            "type": "registry",
+            "id": "cordova.plugins.diagnostic"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

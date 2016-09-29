@@ -305,6 +305,14 @@ module.exports = [
         "clobbers": [
             "baidu_location"
         ]
+    },
+    {
+        "id": "cordova.plugins.diagnostic.Diagnostic",
+        "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+        "pluginId": "cordova.plugins.diagnostic",
+        "clobbers": [
+            "cordova.plugins.diagnostic"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -323,7 +331,8 @@ module.exports.metadata =
     "cordova-plugin-wechat": "1.2.0",
     "cordova-plugin-network-information": "1.3.0",
     "cordova-plugin-inappbrowser": "1.5.0",
-    "com.hewz.plugins.baidu.location": "1.0.0"
+    "com.hewz.plugins.baidu.location": "1.0.0",
+    "cordova.plugins.diagnostic": "3.2.1"
 };
 // BOTTOM OF METADATA
 });

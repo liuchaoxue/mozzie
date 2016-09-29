@@ -32,6 +32,7 @@ appControllers.controller('currentLocationCtrl', function ($scope, JumpPagServic
 
     $scope.setCurrentCity = function (city) {
         localStorage.set("cityName", city);
+        localStorage.set("userChosePoint", city.position);
         JumpPagService.path("/home")
     }
 });

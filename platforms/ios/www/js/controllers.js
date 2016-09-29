@@ -2,8 +2,23 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService, JumpPagService, $ionicLoading) {
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService) {
 
+    LeanCloudClassService.getPoint(
+        {
+            "point": {
+                "$nearSphere": {
+                    __type: "GeoPoint",
+                    latitude: 31.585016,
+                    longitude: 121.530227
+                }
+            },
+            "$maxDistanceInKilometers": 15.0
+        }
+
+        , function (data) {
+            console.log(data)
+        });
     $scope.getPosition = function () {
         CurrentPosition.getPositionPoint().then(function (result) {
             var point = result.point;
