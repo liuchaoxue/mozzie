@@ -15,6 +15,7 @@ appControllers.controller('articleListCtrl', function ($scope, LeanCloudClassSer
                 item.createdAt = $filter('date')(new Date(item.createdAt), "yy/MM/dd");
             });
             $scope.articleInfo = data;
+            $scope.isEmptyList = (typeof data == "undefined") || (data.length == 0);
         })
     }
 
