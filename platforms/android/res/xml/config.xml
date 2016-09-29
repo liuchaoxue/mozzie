@@ -43,7 +43,7 @@
     <feature name="BaiduLocation">
         <param name="android-package" value="com.hewz.plugins.baidu.BaiduLocation" />
     </feature>
-    <name>蚊子叮</name>
+    <name>HelloCordova</name>
     <description>
         An Ionic Framework and Cordova project.
     </description>
