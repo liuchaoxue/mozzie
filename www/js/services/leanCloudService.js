@@ -166,6 +166,19 @@ appServices
                     .success(function (data) {
                         cb(dateFormat(data.results));
                     });
+            },
+
+            getPoint: function (data, cb) {
+                $http.get(LeanCloudAPI.getAPI('sql') + "?cql=" + encodeURIComponent(data), LeanCloudHeaders.headers("application/json"))
+                    .success(function (data) {
+                        cb(dateFormat(data.results))
+                    });
+                cb = cb || function () {
+                    };
+                //$http.get(LeanCloudAPI.getAPI('api') + "/hospitalInfo" + handelWhere(data), LeanCloudHeaders.headers())
+                //    .success(function (data) {
+                //        cb(dateFormat(data.results));
+                //    });
             }
 
         }
