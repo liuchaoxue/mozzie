@@ -4,26 +4,21 @@ var appDirectives = angular.module('app.directives', []);
 
 appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService) {
 
-    //LeanCloudClassService.getPoint({
-    //    where: {
-    //        point: {
-    //            $nearSphere: {
-    //                __type: "GeoPoint",
-    //                latitude: 31.585016,
-    //                longitude: 121.530227
-    //            }
-    //        },
-    //        $maxDistanceInKilometers: 5.0
-    //    }
-    //}, function (data) {
-    //    console.log(data)
-    //});
-    //var getFreeNearDeliverSql = "select * from _User where objectId  not in (select deliverman.objectId from Order where done = false)" +
-    //    " and type = 'deliverMan' and " +
-    //    "lastPosition near [" + 121.530227 + "," + 31.585016 + "] max 5 km";
-    //LeanCloudClassService.getPoint(getFreeNearDeliverSql, function (data) {
-    //    $scope.deliverName = data;
-    //});
+    LeanCloudClassService.getPoint(
+        {
+            "point": {
+                "$nearSphere": {
+                    __type: "GeoPoint",
+                    latitude: 31.585016,
+                    longitude: 121.530227
+                }
+            },
+            "$maxDistanceInKilometers": 15.0
+        }
+
+        , function (data) {
+            console.log(data)
+        });
     $scope.getPosition = function () {
         CurrentPosition.getPositionPoint().then(function (result) {
             var point = result.point;

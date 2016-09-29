@@ -122,6 +122,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     };
 
     $scope.goToRiskAssessment = function () {
+        alert($scope.isContainProvince)
         if ($scope.isContainProvince) {
             return $cordovaToast.showShortCenter("暂时不支持该地区")
         }

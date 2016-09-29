@@ -5,10 +5,12 @@ appServices
     .factory("CurrentPosition", function ($q, $ionicPlatform, $cordovaGeolocation) {
         var defer = $q.defer();
         $ionicPlatform.ready(function () {
-            cordova.plugins.diagnostic.requestLocationAuthorization(
-                function () {
+            alert('statu')
+            cordova.plugins.diagnostic.requestLocationAuthorization(function () {
+                alert('baidu')
+                alert(JSON.stringify(baidu_location))
                     baidu_location.getCurrentPosition(function (pos) {
-                        // currentPoint.latitude, lon: $scope.currentPoint.longitude
+
                         AMap.service('AMap.Geocoder', function () {
                             var geocoder = new AMap.Geocoder({
                                 city: "010"
