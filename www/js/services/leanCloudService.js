@@ -48,7 +48,7 @@ appServices
             getAPI: getAPI
         }
     })
-    .factory('LeanCloudLoginService', function ($http, LeanCloudAPI, LeanCloudHeaders) {
+    .factory('LeanCloudLoginService', function ($http, LeanCloudAPI, LeanCloudHeaders, $cordovaToast) {
 
         return {
             smsVerification: function (data, cb) {
@@ -59,7 +59,7 @@ appServices
                         cb(data);
                     })
                     .error(function () {
-                        alert('发送错误')
+                        $cordovaToast.showShortCenter('发送错误')
                     })
             },
             loginOrRegister: function (data, cb) {
@@ -70,11 +70,11 @@ appServices
                         cb(data);
                     })
                     .error(function () {
-                        alert('验证错误');
+                        $cordovaToast.showShortCenter('验证错误');
                     })
             }
         }
-    }).factory('LeanCloudClassService', function ($http, LeanCloudAPI, LeanCloudHeaders, $filter) {
+    }).factory('LeanCloudClassService', function ($http, LeanCloudAPI, LeanCloudHeaders, $filter, $cordovaToast) {
         function dateFormat(data) {
             data.forEach(function (item) {
                 for (var key in item) {
@@ -125,7 +125,7 @@ appServices
                         cb(data);
                     })
                     .error(function () {
-                        alert('存储错误')
+                        $cordovaToast.showShortCenter('存储错误')
                     })
             },
 
@@ -143,7 +143,7 @@ appServices
                     };
                 $http.post("https://leancloud.cn/1.1/installations", data, LeanCloudHeaders.headers())
                     .success(function (data) {
-                        alert(JSON.stringify(data))
+                        $cordovaToast.showShortCenter(JSON.stringify(data))
                     });
             },
 
@@ -155,7 +155,7 @@ appServices
                         cb(data);
                     })
                     .error(function () {
-                        alert('删除错误，未能删除！')
+                        $cordovaToast.showShortCenter('删除错误，未能删除！')
                     })
             },
 
@@ -182,7 +182,7 @@ appServices
             }
 
         }
-    }).factory('FileUpload', function ($http, LeanCloudAPI, LeanCloudHeaders) {
+    }).factory('FileUpload', function ($http, LeanCloudAPI, LeanCloudHeaders, $cordovaToast) {
         return {
             upload: function (data, cb) {
                 cb = cb || function () {
@@ -193,7 +193,7 @@ appServices
                     .success(function (data) {
                         cb(data);
                     }).error(function () {
-                        return alert('上传错误！')
+                        return $cordovaToast.showShortCenter('上传错误！')
                     });
             }
         }

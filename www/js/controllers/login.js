@@ -8,6 +8,10 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
 
     init();
 
+    $scope.changeColor = function () {
+        document.getElementsByClassName("login-verification-button")[0].style.background = "#51addc";
+    };
+
     $scope.postSms = function (number) {
         if (number == undefined || number == "") {
             return $cordovaToast.showShortCenter("号码为空");
