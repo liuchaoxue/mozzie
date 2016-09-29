@@ -10,6 +10,17 @@ appDirectives
                 //var mapPoint = new BMap.Point(114.539059999, 38.036654);
                 map.centerAndZoom(mapPoint, 16);
 
+                //var currentPoint = localStorage.get("userChosePoint");
+                //
+                //var getFreeNearDeliverSql = "select * from hospitalInfo where " +
+                //    "point near [" + currentPoint.longitude + "," + currentPoint.latitude + "] max 5 km";
+                //LeanCloudClassService.sql(getFreeNearDeliverSql, function (data) {
+                //    for (var i = 0; i < data.length; i++) {
+                //        map.centerAndZoom(data[i].province, 16);
+                //        map.addOverlay(new BMap.Marker(new BMap.Point(data[i].point.longitude, data[i].point.latitude)));
+                //    }
+                //});
+
                 var getAddressInfo = function () {
                     if (local.oz) {
                         local.oz.forEach(function (item, value) {
@@ -51,7 +62,6 @@ appDirectives
                         document.getElementById("mapListInfo").innerHTML = totalInfo;
                     }
                 }, 100);
-
 
                 function getListHtml(num, name, address, meter) {
                     return '<li class="map-li">' +

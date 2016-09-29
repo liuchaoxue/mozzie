@@ -41,6 +41,9 @@ appServices
 
                 case "api" :
                     return HOST + "/1.1/classes";
+
+                case  "sql":
+                    return HOST + "/1.1/cloudQuery";
             }
             return false;
         };
@@ -168,14 +171,12 @@ appServices
                     });
             },
 
-            getPoint: function (data, cb) {
-                cb = cb || function () {
-                    };
-                $http.get(LeanCloudAPI.getAPI('api') + "/hospitalInfo" + handelWhere(data), LeanCloudHeaders.headers())
+            sql: function (sql, cb) {
+                $http.get(LeanCloudAPI.getAPI('sql') + "?cql=" + encodeURIComponent(sql), LeanCloudHeaders.headers())
                     .success(function (data) {
-                        cb(dateFormat(data.results));
-                    });
-            }
+                        cb(dateFormat(data.results))
+                    })
+            },
 
         }
     }).factory('FileUpload', function ($http, LeanCloudAPI, LeanCloudHeaders, $cordovaToast) {

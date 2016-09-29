@@ -17,7 +17,7 @@
                BlueprintIdentifier = "D2AAC07D0554694100DB518D"
                BuildableName = "libCordova.a"
                BlueprintName = "CordovaLib"
-               ReferencedContainer = "container:CordovaLib.xcodeproj">
+               ReferencedContainer = "container:CordovaLib/CordovaLib.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,7 +48,7 @@
             BlueprintIdentifier = "D2AAC07D0554694100DB518D"
             BuildableName = "libCordova.a"
             BlueprintName = "CordovaLib"
-            ReferencedContainer = "container:CordovaLib.xcodeproj">
+            ReferencedContainer = "container:CordovaLib/CordovaLib.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,7 +66,7 @@
             BlueprintIdentifier = "D2AAC07D0554694100DB518D"
             BuildableName = "libCordova.a"
             BlueprintName = "CordovaLib"
-            ReferencedContainer = "container:CordovaLib.xcodeproj">
+            ReferencedContainer = "container:CordovaLib/CordovaLib.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

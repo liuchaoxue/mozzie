@@ -4,21 +4,6 @@ var appDirectives = angular.module('app.directives', []);
 
 appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService) {
 
-    LeanCloudClassService.getPoint(
-        {
-            "point": {
-                "$nearSphere": {
-                    __type: "GeoPoint",
-                    latitude: 31.585016,
-                    longitude: 121.530227
-                }
-            },
-            "$maxDistanceInKilometers": 15.0
-        }
-
-        , function (data) {
-            console.log(data)
-        });
     $scope.getPosition = function () {
         CurrentPosition.getPositionPoint().then(function (result) {
             var point = result.point;
@@ -27,6 +12,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             localStorage.set("userChosePoint", point);
             $scope.takePhotoPosition = data.formattedAddress;
             $scope.currentProvince = data.addressComponent.province;
+            localStorage.set("cityName",{name:data.addressComponent.province});
             $scope.currentAreaName = data.addressComponent.district;
             $scope.$broadcast('currentProvince', point);
         });

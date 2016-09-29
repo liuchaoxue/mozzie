@@ -66,14 +66,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         });
         setBuckButton(backButtonModal);
 
-        getCityName();
         postNewInfo();
         getNumberOfPeople();
-        $scope.isContainProvince = localStorage.get('isContainProvince');
-
         if (localStorage.get('isContainProvince') === null) {
-            $scope.isContainProvince = true
+            localStorage.set("isContainProvince", true);
         }
+        getCityName();
     }
 
     $scope.$on("currentProvince", function (event, data) {
@@ -85,7 +83,6 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             }
         }).success(function (is) {
             localStorage.set('isContainProvince', !is.result.valid);
-            $scope.isContainProvince = !is.result.valid;
         });
     });
 
@@ -100,11 +97,11 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
 
     function getCityName() {
         var currentCity = localStorage.get("cityName");
-        var include = ["", "广东省", "云南省", "广西省", "海南省", "福建省", "浙江省", "上海市"];//todo
+        var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市","河北省","北京市"];//todo
         if (currentCity != null && include.indexOf(currentCity.name)) {
-            $scope.isContainProvince = false;
+            localStorage.set('isContainProvince', false);
         } else {
-            $scope.isContainProvince = true;
+            localStorage.set('isContainProvince', true);
         }
         if (currentCity) {
             $scope.currentProvince = currentCity.name;
@@ -122,8 +119,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     };
 
     $scope.goToRiskAssessment = function () {
-        alert($scope.isContainProvince)
-        if ($scope.isContainProvince) {
+        if (localStorage.get('isContainProvince')) {
             return $cordovaToast.showShortCenter("暂时不支持该地区")
         }
         if ($scope.getLoginStatus()) {
@@ -170,7 +166,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     }
 
     $scope.takePhoto = function () {
-        if ($scope.isContainProvince) {
+        if (localStorage.get('isContainProvince')) {
             return $cordovaToast.showShortCenter("暂时不支持该地区")
         }
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {

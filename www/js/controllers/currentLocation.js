@@ -11,7 +11,7 @@ appControllers.controller('currentLocationCtrl', function ($scope, JumpPagServic
             name: "云南省",
             position: {latitude: 25.0458, longitude: 102.7100}
         }, {
-            name: "广西省",
+            name: "广西壮族自治区",
             position: {latitude: 22.8155, longitude: 108.3275}
         }, {
             name: "海南省",
@@ -32,7 +32,9 @@ appControllers.controller('currentLocationCtrl', function ($scope, JumpPagServic
 
     $scope.setCurrentCity = function (city) {
         localStorage.set("cityName", city);
-        localStorage.set("userChosePoint", city.position);
+        if (city.position) {
+            localStorage.set("userChosePoint", city.position);
+        }
         JumpPagService.path("/home")
     }
 });
