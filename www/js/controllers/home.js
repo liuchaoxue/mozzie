@@ -135,6 +135,8 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                     localStorage.set("lastPicture", {takePhotoTimeISO: data[0].createdAt});
                     JumpPagService.path("/riskAssessment");
                 }
+            }, function (err) {
+                $cordovaToast.showShortCenter("抱歉，网络链接故障");
             });
         } else {
             JumpPagService.path("/login")

@@ -5,6 +5,9 @@
     </button>
 </ion-header-bar>
 <ion-content padding="false" class="has-header" overflow-scroll="false" on-drag-right="onDragRight()">
+    <div class="list-empty" ng-if="isEmptyList">
+        <img src="./img/list_empty.png">
+    </div>
     <ion-item class="item ic-selected articleList-list-item-p12 fs14" ng-repeat="x in articleInfo" ng-click="goToArticleInfo(x)">
         {{x.title}}
         <span class="articleList-list-time" ng-bind="x.createdAt"></span>
