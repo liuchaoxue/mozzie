@@ -18,7 +18,7 @@ appControllers.controller('manageCtrl', function ($scope, LeanCloudClassService,
         onChange: function () {
             $ionicScrollDelegate.scrollTop(false);
             var page = $scope.paginationConf.currentPage;
-            $scope.imgInfo = localStorage.get('imgInfo').slice((page - 1) * 2, page * 2);
+            $scope.imgInfo = localStorage.get('imgInfo').slice((page - 10) * 2, page * 10);
         }
     };
 
