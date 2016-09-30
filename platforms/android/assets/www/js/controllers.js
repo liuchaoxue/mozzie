@@ -12,7 +12,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             localStorage.set("userChosePoint", point);
             $scope.takePhotoPosition = data.formattedAddress;
             $scope.currentProvince = data.addressComponent.province;
-            localStorage.set("cityName",{name:data.addressComponent.province});
+            localStorage.set("cityName", {name: data.addressComponent.province});
             $scope.currentAreaName = data.addressComponent.district;
             $scope.$broadcast('currentProvince', point);
         });
@@ -27,8 +27,10 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
         $scope.familySymptom = data;
     };
 
-    $scope.hideWelcomePictures = function () {
-        document.getElementsByName("welcomeImg")[0].style.display = "none";
+    $scope.hideWelcomePictures = function (index) {
+        if (index == 2 || index == undefined) {
+            document.getElementsByClassName("WelcomeSlide")[0].style.display = "none";
+        }
     };
 
     function getUserImg() {
