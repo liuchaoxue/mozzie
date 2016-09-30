@@ -17,3 +17,9 @@
 .articleList-list-item-p12 {
     padding: 12px;
 }
+
+.list-empty {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
