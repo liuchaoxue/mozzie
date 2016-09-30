@@ -12,7 +12,7 @@ appControllers.controller('manageCtrl', function ($scope, LeanCloudClassService,
     $scope.paginationConf = {
         currentPage: 1,
         totalItems: localStorage.get('imgInfo').length,
-        itemsPerPage: 2,
+        itemsPerPage: 10,
         pagesLength: 10,
         perPageOptions: [10, 20, 30, 40, 50],
         onChange: function () {

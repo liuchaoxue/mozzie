@@ -8,6 +8,9 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
     })
 
     .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage) {
+        localStorage.removeItem("cityName");
+        localStorage.removeItem("isContainProvince");
+        localStorage.removeItem("userChosePoint");
 
         var isNet = onlinenetwork({
             "time": 1000,
@@ -47,8 +50,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
 
             function backButton() {
                 if ($rootScope.backButtonPressedOnceToExit) {
-                    localStorage.removeItem("cityName");
-                    localStorage.removeItem("isContainProvince");
                     ionic.Platform.exitApp();
                 } else {
                     $rootScope.backButtonPressedOnceToExit = true;
