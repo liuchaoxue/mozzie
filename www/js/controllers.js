@@ -4,6 +4,17 @@ var appDirectives = angular.module('app.directives', []);
 
 appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService) {
 
+
+    document.addEventListener("offline", onOffline, false);
+    function onOffline(){
+        alert("网络无法连接");
+    }
+
+    document.addEventListener("online", onOnline, false);
+    function onOnline() {
+        alert("网络已经连接");
+    }
+
     $scope.getPosition = function () {
         CurrentPosition.getPositionPoint().then(function (result) {
             var point = result.point;
