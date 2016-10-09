@@ -4,7 +4,8 @@
         <div ng-click="goToCurrentLocation()">
             <img src="./img/position.png" class="home-position-img">
 
-            <span ng-class="{true:'home-position-ios-test',false:'home-position-android-test'}[isiOS]">{{currentProvince}}</span>
+            <span ng-class="{true:'home-position-ios-test',false:'home-position-android-test'}[isiOS]"
+                  ng-bind="homePageShowProvince()"></span>
             <!--<div>{{test}}</div>-->
 
         </div>
@@ -43,7 +44,7 @@
                             传染疾病可能性
                         </ion-item>
                         <form class="list home-modal-text-p16 spacer-width" ng-repeat="y in x.illness"
-                        >
+                                >
                             <!--repeat-end="showModal()">-->
                             <p class="home-modal-title-name" ng-bind="y.title"></p>
 

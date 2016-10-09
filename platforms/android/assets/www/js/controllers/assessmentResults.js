@@ -3,9 +3,6 @@
  */
 appControllers.controller('assessmentResultsCtrl', function ($scope, $cordovaToast, JumpPagService, localStorage) {
     $scope.goToNearbyHospital = function () {
-        if (localStorage.get("userChosePoint") == undefined) {
-            return $cordovaToast.showShortCenter("请检查GPS是否开启")
-        }
         JumpPagService.path("/nearbyHospital");
     };
 

@@ -9,7 +9,8 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
         }, 500);
     };
     var map = new BMap.Map("allmap");
-    var mapPoint = new BMap.Point($scope.currentPoint.longitude, $scope.currentPoint.latitude);
+    var currentPoint = localStorage.get("userChosePoint");
+    var mapPoint = new BMap.Point(currentPoint.longitude, currentPoint.latitude);
     //var mapPoint = new BMap.Point(114.539059999, 38.036654);
     map.centerAndZoom(mapPoint, 14);
 
@@ -35,7 +36,6 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
         }
     };
 
-    var currentPoint = localStorage.get("userChosePoint");
     var getFreeNearDeliverSql = "select * from hospitalInfo where " +
         "point near [" + currentPoint.longitude + "," + currentPoint.latitude + "] max 5 km";
     LeanCloudClassService.sql(getFreeNearDeliverSql, function (data) {

@@ -26,7 +26,7 @@ appControllers.controller('currentLocationCtrl', function ($scope, JumpPagServic
             name: "上海市",
             position: {latitude: 31.2304, longitude: 121.4737}
         }];
-        $scope.getPosition();
+        $scope.currentProvince = localStorage.get("currentProvince");
     }
 
     init();

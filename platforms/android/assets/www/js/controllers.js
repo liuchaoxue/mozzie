@@ -12,22 +12,22 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $inter
     });
 
     $scope.getPosition = function () {
-        var getPoint = $interval(function () {
-            CurrentPosition.getPositionPoint().then(function (result) {
-                var point = result.point;
-                var data = result.data;
-                $scope.currentPoint = point;
-                alert(1)
-                localStorage.set("userChosePoint", point);
-                $scope.takePhotoPosition = data.formattedAddress;
-                $scope.currentProvince = data.addressComponent.province;
-                localStorage.set("cityName", {name: data.addressComponent.province});
-                $scope.currentAreaName = data.addressComponent.district;
-                $scope.$broadcast('currentProvince', point);
-                $interval.cancel(getPoint);
-            });
-            $cordovaToast.showShortCenter("1")
-        }, 10000);
+
+//        var getPoint = $interval(function () {
+        CurrentPosition.getPositionPoint().then(function (result) {
+            var point = result.point;
+            var data = result.data;
+            localStorage.set("userChosePoint", point);
+//                $scope.takePhotoPosition = data.formattedAddress;
+//            $scope.currentProvince = data.addressComponent.province;
+            localStorage.set("currentProvince", data.addressComponent.province);
+            localStorage.set("cityName", {name: data.addressComponent.province});
+            $scope.currentAreaName = data.addressComponent.district;
+            $scope.$broadcast('currentProvince', point);
+//                $interval.cancel(getPoint);
+        });
+//            $cordovaToast.showShortCenter("1");
+//        }, 10000);
     };
 
     $scope.showSymptom = function () {

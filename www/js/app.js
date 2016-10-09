@@ -8,7 +8,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
     })
 
     .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage) {
-        localStorage.removeItem("cityName");
+//        localStorage.removeItem("cityName");
         localStorage.removeItem("isContainProvince");
         localStorage.removeItem("userChosePoint");
 

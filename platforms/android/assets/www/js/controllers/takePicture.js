@@ -21,6 +21,7 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
         $scope.takePhotoTime = $filter('date')(new Date(), "HH:mm yyyy/MM/dd");
         $scope.takePhotoTimeISO = new Date().toISOString();
         $scope.imgURL = localStorage.get("imgURL");
+        $scope.takePhotoPosition = localStorage.get("cityName").name;
     }
 
     init();
@@ -49,9 +50,6 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
     }
 
     $scope.postImg = function () {
-        if (localStorage.get("userChosePoint") == undefined) {
-            return $cordovaToast.showShortCenter("请检查GPS是否开启")
-        }
         LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
             // localStorage.set("lastPage", "/takePicture");
             var point = localStorage.get("userChosePoint");

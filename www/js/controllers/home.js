@@ -71,6 +71,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         if (localStorage.get('isContainProvince') === null) {
             localStorage.set("isContainProvince", true);
         }
+        $scope.homePageShowProvince = function () {
+            if (localStorage.get("cityName") == undefined) {
+                return "定位失败"
+            }
+            return localStorage.get("cityName").name
+        };
         getCityName();
     }
 
@@ -97,7 +103,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
 
     function getCityName() {
         var currentCity = localStorage.get("cityName");
-        var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市","河北省","北京市"];//todo
+        var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];//todo
         if (currentCity != null && include.indexOf(currentCity.name)) {
             localStorage.set('isContainProvince', false);
         } else {
