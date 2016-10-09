@@ -12,6 +12,16 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
         localStorage.removeItem("isContainProvince");
         localStorage.removeItem("userChosePoint");
 
+//        document.addEventListener("offline", onOffline, false);
+//        function onOffline(){
+//            alert("网络无法连接");
+//        }
+//
+//        document.addEventListener("online", onOnline, false);
+//        function onOnline() {
+//            alert("网络已经连接");
+//        }
+
         var isNet = onlinenetwork({
             "time": 1000,
             "url": ""

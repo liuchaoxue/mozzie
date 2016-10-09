@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/chen/Downloads/mozzie/platforms/android/CordovaLib/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/chen/Downloads/mozzie/platforms/android/CordovaLib/src/release/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/chenyu/Desktop/mozzie/platforms/android/CordovaLib/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/chenyu/Desktop/mozzie/platforms/android/CordovaLib/src/release/shaders"/></dataSet></merger>

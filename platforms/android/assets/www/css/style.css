@@ -118,10 +118,10 @@
 
 /*near*/
 #mapListInfo {
-    position: absolute;
-    height: 30%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+    /*position: absolute;*/
+    /*height: 30%;*/
+    /*overflow: scroll;*/
+    /*-webkit-overflow-scrolling: touch;*/
     width: 100%;
     color: #888;
 }
@@ -133,6 +133,13 @@
 
 .map-list-address {
     margin-left: 12px;
+}
+
+.map-page {
+    position: absolute;
+    height: 25%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .assessment-position {
@@ -163,8 +170,10 @@
     width: 25%;
     height: 35px;
     background: #6297d9;
-    border: 1px solid white;    border-radius: 5px;
-    color: white;left:40%
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    left: 40%
 }
 
 /*分页*/

@@ -2,7 +2,14 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService) {
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, $cordovaToast, LeanCloudClassService) {
+
+
+    document.addEventListener("click", function(){
+        if(navigator.onLine == false) {
+            $cordovaToast.showShortCenter("网络不给力")
+        }
+    });
 
     $scope.getPosition = function () {
         CurrentPosition.getPositionPoint().then(function (result) {
@@ -12,7 +19,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             localStorage.set("userChosePoint", point);
             $scope.takePhotoPosition = data.formattedAddress;
             $scope.currentProvince = data.addressComponent.province;
-            localStorage.set("cityName",{name:data.addressComponent.province});
+            localStorage.set("cityName", {name: data.addressComponent.province});
             $scope.currentAreaName = data.addressComponent.district;
             $scope.$broadcast('currentProvince', point);
         });
@@ -27,8 +34,10 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
         $scope.familySymptom = data;
     };
 
-    $scope.hideWelcomePictures = function () {
-        document.getElementsByName("welcomeImg")[0].style.display = "none";
+    $scope.hideWelcomePictures = function (index) {
+        if (index == 2 || index == undefined) {
+            document.getElementsByClassName("WelcomeSlide")[0].style.display = "none";
+        }
     };
 
     function getUserImg() {
@@ -61,7 +70,6 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             quality: 75,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
-            // allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
             targetWidth: 300,
             targetHeight: 300,

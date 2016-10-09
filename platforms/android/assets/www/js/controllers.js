@@ -2,20 +2,32 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, LeanCloudClassService) {
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, $interval, CurrentPosition, $cordovaToast, LeanCloudClassService) {
+
+
+    document.addEventListener("click", function () {
+        if (navigator.onLine == false) {
+            $cordovaToast.showShortCenter("网络不给力")
+        }
+    });
 
     $scope.getPosition = function () {
-        CurrentPosition.getPositionPoint().then(function (result) {
-            var point = result.point;
-            var data = result.data;
-            $scope.currentPoint = point;
-            localStorage.set("userChosePoint", point);
-            $scope.takePhotoPosition = data.formattedAddress;
-            $scope.currentProvince = data.addressComponent.province;
-            localStorage.set("cityName", {name: data.addressComponent.province});
-            $scope.currentAreaName = data.addressComponent.district;
-            $scope.$broadcast('currentProvince', point);
-        });
+        var getPoint = $interval(function () {
+            CurrentPosition.getPositionPoint().then(function (result) {
+                var point = result.point;
+                var data = result.data;
+                $scope.currentPoint = point;
+                alert(1)
+                localStorage.set("userChosePoint", point);
+                $scope.takePhotoPosition = data.formattedAddress;
+                $scope.currentProvince = data.addressComponent.province;
+                localStorage.set("cityName", {name: data.addressComponent.province});
+                $scope.currentAreaName = data.addressComponent.district;
+                $scope.$broadcast('currentProvince', point);
+                $interval.cancel(getPoint);
+            });
+            $cordovaToast.showShortCenter("1")
+        }, 10000);
     };
 
     $scope.showSymptom = function () {
@@ -63,7 +75,6 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
             quality: 75,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
-             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
             targetWidth: 300,
             targetHeight: 300,

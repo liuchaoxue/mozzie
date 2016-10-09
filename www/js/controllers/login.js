@@ -37,12 +37,7 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
 
     function login(data) {
         LeanCloudLoginService.loginOrRegister(data, function (data) {
-            if (data.type == "admin") {
-                JumpPagService.path("/manage")
-            } else {
-                JumpPagService.path("/home");
-            }
-
+            JumpPagService.path("/home");
             localStorage.set("currentUser", data);
         });
     }
