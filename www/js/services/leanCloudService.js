@@ -176,8 +176,7 @@ appServices
                     .success(function (data) {
                         cb(dateFormat(data.results))
                     })
-            },
-
+            }
         }
     }).factory('FileUpload', function ($http, LeanCloudAPI, LeanCloudHeaders, $cordovaToast) {
         return {

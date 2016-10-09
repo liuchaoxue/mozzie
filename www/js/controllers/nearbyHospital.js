@@ -36,12 +36,6 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
         }
     };
 
-    var getFreeNearDeliverSql = "select * from hospitalInfo where " +
-        "point near [" + currentPoint.longitude + "," + currentPoint.latitude + "] max 5 km";
-    LeanCloudClassService.sql(getFreeNearDeliverSql, function (data) {
-        localStorage.set("mapPositionInfo", data);
-
-    });
 
     function addOverlay(item, value) {
         var myIcon = new BMap.Icon("./img/ditu.png", new BMap.Size(23, 25), {
