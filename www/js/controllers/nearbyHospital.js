@@ -55,7 +55,7 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
     }
 
     function getRange(item) {
-        var mapPosition = map.getDistance(new BMap.Point(113.2665, 23.1322), new BMap.Point(item.longitude, item.latitude));
+        var mapPosition = map.getDistance(new BMap.Point(currentPoint.longitude, currentPoint.latitude), new BMap.Point(item.longitude, item.latitude));
 
         if (mapPosition >= 1000) {
             return (mapPosition / 1000).toFixed(1) + '公里';
