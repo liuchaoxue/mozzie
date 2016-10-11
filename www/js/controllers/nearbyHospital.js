@@ -66,6 +66,7 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
     }
 
     function init() {
+        $scope.cityName = localStorage.get("cityName").name;
         document.getElementById("allmap").style.height = (document.body.scrollHeight - document.body.scrollHeight * 0.7 + 43) + "px";
     }
 

@@ -11,6 +11,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
 //        localStorage.removeItem("cityName");
         localStorage.removeItem("isContainProvince");
         localStorage.removeItem("userChosePoint");
+        localStorage.removeItem("baidu_location");
 
         var isNet = onlinenetwork({
             "time": 1000,

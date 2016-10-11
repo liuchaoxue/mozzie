@@ -2,7 +2,7 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, $interval, CurrentPosition, $cordovaToast, LeanCloudClassService) {
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, $interval, $window, CurrentPosition, $cordovaToast, LeanCloudClassService) {
 
 
     document.addEventListener("click", function () {
@@ -14,20 +14,34 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $inter
     $scope.getPosition = function () {
 
 //        var getPoint = $interval(function () {
-        CurrentPosition.getPositionPoint().then(function (result) {
-            var point = result.point;
-            var data = result.data;
-            localStorage.set("userChosePoint", point);
-//                $scope.takePhotoPosition = data.formattedAddress;
-//            $scope.currentProvince = data.addressComponent.province;
-            localStorage.set("currentProvince", data.addressComponent.province);
-            localStorage.set("cityName", {name: data.addressComponent.province});
-            $scope.currentAreaName = data.addressComponent.district;
-            $scope.$broadcast('currentProvince', point);
-//                $interval.cancel(getPoint);
-        });
+//            $cordovaToast.showShortCenter("2");
+//            if (localStorage.get("baidu_location") != undefined) {
+//                alert(1)
+//                var geoc = new BMap.Geocoder();
+//                alert(5)
+//                alert(JSON.stringify(localStorage.get("baidu_location")))
+//                geoc.getLocation(new BMap.Point(localStorage.get("baidu_location").longitude, localStorage.get("baidu_location").latitude), function (result) {
+//                    alert(JSON.stringify(result));
+//                    $interval.cancel(getPoint);
+//                });
+//            }
+////            CurrentPosition.getPositionPoint().then(function (result) {
+////                console.log(result)
+////                var point = result.point;
+////                var data = result.data;
+////                localStorage.set("currentPoint", point);
+////                localStorage.set("userChosePoint", point);
+//////                $scope.takePhotoPosition = data.formattedAddress;
+//////            $scope.currentProvince = data.addressComponent.province;
+////                localStorage.set("currentProvince", data.addressComponent.province);
+////                localStorage.set("cityName", {name: data.addressComponent.province});
+////                $scope.currentAreaName = data.addressComponent.district;
+////                $scope.$broadcast('currentProvince', point);
+////                $interval.cancel(getPoint);
+////            });
+////            $window.location.reload();
 //            $cordovaToast.showShortCenter("1");
-//        }, 10000);
+//        }, 5000);
     };
 
     $scope.showSymptom = function () {

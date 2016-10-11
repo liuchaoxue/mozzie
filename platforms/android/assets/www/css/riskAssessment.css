@@ -42,6 +42,11 @@
     right: 10px;
 }
 
+a:hover {
+    color: #ffffff;
+    text-decoration: blink;
+}
+
 .risk-button {
     margin: 0 12px;
     color: white;
@@ -51,6 +56,7 @@
     line-height: 48px;
     text-align: center;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .risk-symptom-choose {

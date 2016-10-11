@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-22.
  */
-appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal, $stateParams, $ionicSlideBoxDelegate, $http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
+appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal, $stateParams, $ionicSlideBoxDelegate, $interval, $http, $cordovaToast, localStorage, backButton, LeanCloudClassService, $state, JumpPagService, $cordovaCamera) {
 
     $scope.showMozzinfo = function () {
         $ionicModal.fromTemplateUrl("templates/maybeMozzieModal.html", {
@@ -93,6 +93,19 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     });
 
     init();
+    var getPoint = $interval(function () {
+        alert(JSON.stringify(localStorage.get("baidu_location")))
+        if (localStorage.get("baidu_location") != null ||localStorage.get("baidu_location") != undefined) {
+            alert(5)
+            var geoc = new BMap.Geocoder();
+            alert(JSON.stringify(localStorage.get("baidu_location")));
+            geoc.getLocation(new BMap.Point(localStorage.get("baidu_location").longitude, localStorage.get("baidu_location").latitude), function (result) {
+                alert(JSON.stringify(result));
+                $interval.cancel(getPoint);
+            });
+        }
+        $cordovaToast.showShortCenter("1");
+    }, 5000);
 
     function getNumberOfPeople() {
         var data = {where: {objectId: "57baaba7165abd006624d642"}};
@@ -110,7 +123,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             localStorage.set('isContainProvince', true);
         }
         if (currentCity) {
-            $scope.currentProvince = currentCity.name;
+//            $scope.currentProvince = currentCity.name;
         }
     }
 
