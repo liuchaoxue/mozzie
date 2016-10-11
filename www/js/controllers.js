@@ -16,6 +16,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $inter
             alert(JSON.stringify(localStorage.get("baidu_location")))
             if (localStorage.get("baidu_location") != null ||localStorage.get("baidu_location") != undefined) {
                 alert(5)
+                $window.location.reload();
                 var geoc = new BMap.Geocoder();
                 alert(JSON.stringify(localStorage.get("baidu_location")));
                 geoc.getLocation(new BMap.Point(localStorage.get("baidu_location").longitude, localStorage.get("baidu_location").latitude), function (result) {
