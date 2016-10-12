@@ -11,3 +11,12 @@
     background: #bababa;
     margin-bottom: 10px
 }
+
+.articleInfo-content {
+
+}
+
+.articleInfo-content img {
+    max-width: 100%;
+    height: auto;
+}
