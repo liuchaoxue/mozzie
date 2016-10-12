@@ -4,14 +4,14 @@
             当前定位
         </ion-item>
         <ion-item class="item ic-selected articleList-list-item-p12 fs14 ng-binding"
-                  ng-click="setCurrentCity({name:currentProvince})" ng-show="currentProvince!= undefined">
+                  ng-click="setCurrentCity(currentProvince)" ng-show="currentProvince != undefined">
             <i class="ion-ios-location-outline"></i> {{currentProvince}}
         </ion-item>
         <ion-item class="item ic-selected articleList-list-item-p12 fs14 ng-binding" ng-show="currentProvince == undefined">
             定位服务未开启, 请稍后重试
         </ion-item>
         <ion-item class="item ic-selected articleList-list-item-p12 home-photo-top-text ng-binding userCenter-bc">
-            目前开通的省份
+            目前开通的地区
         </ion-item>
         <ion-item class="item ic-selected articleList-list-item-p12 fs14 ng-binding" ng-repeat="x in cityName"
                   ng-bind="x.name" ng-click="setCurrentCity(x)">

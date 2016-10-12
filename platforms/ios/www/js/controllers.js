@@ -2,27 +2,29 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, CurrentPosition, $cordovaToast, LeanCloudClassService) {
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordovaToast, $interval, CurrentPosition, LeanCloudClassService) {
 
-
-    document.addEventListener("click", function(){
-        if(navigator.onLine == false) {
+    document.addEventListener("click", function () {
+        if (navigator.onLine == false) {
             $cordovaToast.showShortCenter("网络不给力")
         }
     });
 
     $scope.getPosition = function () {
-        CurrentPosition.getPositionPoint().then(function (result) {
-            var point = result.point;
-            var data = result.data;
-            $scope.currentPoint = point;
-            localStorage.set("userChosePoint", point);
-            $scope.takePhotoPosition = data.formattedAddress;
-            $scope.currentProvince = data.addressComponent.province;
-            localStorage.set("cityName", {name: data.addressComponent.province});
-            $scope.currentAreaName = data.addressComponent.district;
-            $scope.$broadcast('currentProvince', point);
-        });
+        var getPoint = $interval(function () {
+            var gpsPoint = localStorage.get("baidu_location");
+            if (gpsPoint != null || gpsPoint != undefined) {
+                var geoc = new BMap.Geocoder();
+                geoc.getLocation(new BMap.Point(gpsPoint.longitude, gpsPoint.latitude), function (result) {
+                    localStorage.set("userChosePoint", gpsPoint);
+                    localStorage.set("currentProvince", result.addressComponents.province);
+                    localStorage.set("gpsProvince", result.addressComponents.province);
+                    localStorage.set("currentAddress", result.address);
+                    $interval.cancel(getPoint);
+                    $scope.$broadcast('currentProvince', gpsPoint);
+                });
+            }
+        }, 5000);
     };
 
     $scope.showSymptom = function () {
@@ -63,7 +65,6 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, Curren
     }
 
     init();
-
 
     $scope.getCameraOptions = function () {
         return {

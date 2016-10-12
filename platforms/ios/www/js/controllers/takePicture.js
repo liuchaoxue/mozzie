@@ -24,6 +24,11 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
     }
 
     init();
+    $scope.takePhotoPosition = function () {
+        var gps = localStorage.get("gpsProvince");
+        var current = localStorage.get("currentProvince");
+        return gps == current ? localStorage.get("currentAddress") : current;
+    };
 
     function getUserId() {
         return $scope.getLoginStatus() ? {
@@ -33,27 +38,23 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
         } : null;
     }
 
-    function getImgInfo() {
+    function getImgInfo(point) {
         return {
-            imgPosition: $scope.takePhotoPosition,
+            imgPosition: $scope.takePhotoPosition(),
             imgCoordinate: {
                 "__type": "GeoPoint",
-                "latitude": $scope.currentPoint.latitude,
-                "longitude": $scope.currentPoint.longitude
+                "latitude": point.latitude,
+                "longitude": point.longitude
             },
-            img: localStorage.get("imgURL"),
+            img: $scope.imgURL,
             mozzieImg: $scope.mozzieimgURL || "",
             user: getUserId()
         };
     }
 
     $scope.postImg = function () {
-        if ($scope.currentPoint == undefined) {
-            return $cordovaToast.showShortCenter("请检查GPS是否开启")
-        }
-        LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
-            // localStorage.set("lastPage", "/takePicture");
-            var point = localStorage.get("userChosePoint") || $scope.currentPoint;
+        var point = localStorage.get("userChosePoint");
+        LeanCloudClassService.create("CameraPosition", getImgInfo(point), function () {
             localStorage.set("showMozzinfo", true);
             localStorage.set("lastPicture", {
                 imgPosition: $scope.takePhotoPosition,

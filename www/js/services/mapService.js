@@ -12,6 +12,10 @@ appServices
                         navigator.geolocation.getCurrentPosition(function (position) {
                             var lat = position.coords.latitude;
                             var lon = position.coords.longitude;
+                            if (navigator.onLine == true) {
+                                localStorage.set("baidu_location", position.coords);
+                                $interval.cancel(getPoint);
+                            }
 //                        AMap.service('AMap.Geocoder', function () {
 //                            var geocoder = new AMap.Geocoder({
 //                                city: "010"
@@ -32,17 +36,17 @@ appServices
 //                                }
 //                            });
 //                        });
-                            var geoc = new BMap.Geocoder();
-                            geoc.getLocation(new BMap.Point(lon, lat), function (result) {
-                                alert(JSON.stringify(result));
-                                defer.resolve({
-                                    point: {
-                                        latitude: lat,
-                                        longitude: lon
-                                    },
-                                    data: result.addressComponents
-                                })
-                            });
+//                            var geoc = new BMap.Geocoder();
+//                            geoc.getLocation(new BMap.Point(lon, lat), function (result) {
+//                                alert(JSON.stringify(result));
+//                                defer.resolve({
+//                                    point: {
+//                                        latitude: lat,
+//                                        longitude: lon
+//                                    },
+//                                    data: result.addressComponents
+//                                })
+//                            });
                         }, function (err) {
                             console.error("Position error: code=" + err.code + "; message=" + err.message);
                         }, posOptions);

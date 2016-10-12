@@ -9,7 +9,8 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
         }, 500);
     };
     var map = new BMap.Map("allmap");
-    var mapPoint = new BMap.Point($scope.currentPoint.longitude, $scope.currentPoint.latitude);
+    var currentPoint = localStorage.get("userChosePoint");
+    var mapPoint = new BMap.Point(currentPoint.longitude, currentPoint.latitude);
     //var mapPoint = new BMap.Point(114.539059999, 38.036654);
     map.centerAndZoom(mapPoint, 14);
 
@@ -35,13 +36,6 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
         }
     };
 
-    var currentPoint = localStorage.get("userChosePoint");
-    var getFreeNearDeliverSql = "select * from hospitalInfo where " +
-        "point near [" + currentPoint.longitude + "," + currentPoint.latitude + "] max 5 km";
-    LeanCloudClassService.sql(getFreeNearDeliverSql, function (data) {
-        localStorage.set("mapPositionInfo", data);
-
-    });
 
     function addOverlay(item, value) {
         var myIcon = new BMap.Icon("./img/ditu.png", new BMap.Size(23, 25), {
@@ -61,7 +55,7 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
     }
 
     function getRange(item) {
-        var mapPosition = map.getDistance(new BMap.Point(113.2665, 23.1322), new BMap.Point(item.longitude, item.latitude));
+        var mapPosition = map.getDistance(new BMap.Point(currentPoint.longitude, currentPoint.latitude), new BMap.Point(item.longitude, item.latitude));
 
         if (mapPosition >= 1000) {
             return (mapPosition / 1000).toFixed(1) + '公里';
@@ -72,6 +66,7 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
     }
 
     function init() {
+        $scope.cityName = localStorage.get("currentProvince");
         document.getElementById("allmap").style.height = (document.body.scrollHeight - document.body.scrollHeight * 0.7 + 43) + "px";
     }
 
