@@ -11,10 +11,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         }).then(function (modal) {
             $scope.modal = modal;
             var lastPicture = localStorage.get('lastPicture');
+            var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
             $http.post("https://leancloud.cn/1.1/functions/insect_statistic", {
                 lat: lastPicture.imgCoordinate.latitude,
                 lon: lastPicture.imgCoordinate.longitude,
-                time: lastPicture.takePhotoTimeISO
+                time: lastPicture.takePhotoTimeISO,
+                user_id: objectId
             }, {
                 headers: {
                     "Content-Type": "application/json",
@@ -36,12 +38,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         localStorage.set("showMozzinfo", false);
     }
 
-    $scope.showModal = function () {
-        localStorage.removeItem("lastPage");
-        localStorage.removeItem("imgURL");
-        $scope.modal.show();
-        localStorage.set("modal", $scope.modal.isShown())
-    };
+//    $scope.showModal = function () {
+//        localStorage.removeItem("lastPage");
+//        localStorage.removeItem("imgURL");
+//        $scope.modal.show();
+//        localStorage.set("modal", $scope.modal.isShown())
+//    };
 
     function isModalShow() {
         return localStorage.get("modal") == true;
@@ -61,7 +63,6 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
 
     function init() {
         var backButtonModal = backButton.modal(isModalShow, function () {
-            // $scope.modal.remove();
             setBuckButton(backButtonModal);
         });
         setBuckButton(backButtonModal);
@@ -69,27 +70,35 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         postNewInfo();
         getNumberOfPeople();
         if (localStorage.get('isContainProvince') === null) {
-            localStorage.set("isContainProvince", true);
+            localStorage.set("isContainProvince", false);
         }
-        $scope.homePageShowProvince = function () {
-            if (localStorage.get("cityName") == undefined) {
-                return "定位失败"
-            }
-            return localStorage.get("cityName").name
-        };
+
+        $scope.checkGps();
         getCityName();
     }
 
+    $scope.checkGps = function () {
+        var currentProvince = localStorage.get("currentProvince");
+        if (currentProvince != null) {
+            $scope.homePageShowProvince = localStorage.get("currentProvince");
+        } else {
+            $scope.homePageShowProvince = "定位中";
+        }
+    };
+
     $scope.$on("currentProvince", function (event, data) {
-        $http.post("https://leancloud.cn/1.1/functions/is_available", {lat: data.latitude, lon: data.longitude}, {
-            headers: {
-                "Content-Type": "application/json",
-                "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
-                "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
-            }
-        }).success(function (is) {
-            localStorage.set('isContainProvince', !is.result.valid);
-        });
+        var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
+        $http.post("https://leancloud.cn/1.1/functions/is_available",
+            {lat: data.latitude, lon: data.longitude, user_id: objectId}, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                    "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+                }
+            }).success(function (is) {
+                $scope.checkGps();
+                localStorage.set('isContainProvince', is.result.valid);
+            });
     });
 
     init();
@@ -102,15 +111,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     }
 
     function getCityName() {
-        var currentCity = localStorage.get("cityName");
+        var currentCity = localStorage.get("currentProvince");
         var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];//todo
-        if (currentCity != null && include.indexOf(currentCity.name)) {
-            localStorage.set('isContainProvince', false);
-        } else {
+        if (currentCity != null && include.indexOf(currentCity)) {
             localStorage.set('isContainProvince', true);
-        }
-        if (currentCity) {
-//            $scope.currentProvince = currentCity.name;
+        } else {
+            localStorage.set('isContainProvince', false);
         }
     }
 
@@ -125,7 +131,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     };
 
     $scope.goToRiskAssessment = function () {
-        if (localStorage.get('isContainProvince')) {
+        if (!localStorage.get('isContainProvince')) {
             return $cordovaToast.showShortCenter("暂时不支持该地区")
         }
         if ($scope.getLoginStatus()) {
@@ -174,7 +180,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     }
 
     $scope.takePhoto = function () {
-        if (localStorage.get('isContainProvince')) {
+        if (!localStorage.get('isContainProvince')) {
             return $cordovaToast.showShortCenter("暂时不支持该地区")
         }
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
@@ -190,4 +196,5 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     $scope.lastSlide = function () {
         $ionicSlideBoxDelegate.previous();
     }
-});
+})
+;

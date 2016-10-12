@@ -34,12 +34,13 @@
     <script src="bower_components/leancloud-push.js/src/AV.push.js"></script>
 
 
-    <script type="text/javascript"
-            src="http://api.map.baidu.com/api?v=2.0&ak=VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK"></script>
-    <script type="text/javascript"
-            src="http://api.map.baidu.com/api?v=2.0&ak=zqUiOGvjZ6SDByHeKGj5a37BEFrT9qoG"></script>
-    <script type="text/javascript"
-            src="http://webapi.amap.com/maps?v=1.3&key=be31bc453fdbad980bfc05c73000308c"></script>
+    <!--<script type="text/javascript"-->
+    <!--src="http://api.map.baidu.com/api?v=2.0&ak=VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK"></script>-->
+    <script src="lib/baidu/liu.js"></script>
+    <!--<script type="text/javascript"-->
+    <!--src="http://api.map.baidu.com/api?v=2.0&ak=zqUiOGvjZ6SDByHeKGj5a37BEFrT9qoG"></script>-->
+    <!--<script type="text/javascript"-->
+    <!--src="http://webapi.amap.com/maps?v=1.3&key=be31bc453fdbad980bfc05c73000308c"></script>-->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
@@ -86,17 +87,14 @@
         <ion-nav-back-button class="button-icon icon ion-ios-arrow-back"></ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
-    <ion-slide-box does-continue="true" show-pager="false" auto-play="true" slide-interval="4000"
+    <ion-slide-box does-continue="true" show-pager="false" auto-play="false"
                    on-slide-changed="hideWelcomePictures($index)" class="WelcomeSlide">
         <ion-slide>
             <img src="./img/1.jpg">
-            <button ng-click="hideWelcomePictures()">马上体验
-            </button>
         </ion-slide>
         <ion-slide>
             <img src="./img/2.jpg">
-            <button ng-click="hideWelcomePictures()">马上体验
-            </button>
+            <button ng-click="hideWelcomePictures()">马上体验</button>
         </ion-slide>
     </ion-slide-box>
     <div class="risk-modal-box" ng-hide="modalHide"></div>

@@ -2,8 +2,7 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, $interval, $window, CurrentPosition, $cordovaToast, LeanCloudClassService) {
-
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordovaToast, $interval, CurrentPosition, LeanCloudClassService) {
 
     document.addEventListener("click", function () {
         if (navigator.onLine == false) {
@@ -12,36 +11,20 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $inter
     });
 
     $scope.getPosition = function () {
-
-//        var getPoint = $interval(function () {
-//            $cordovaToast.showShortCenter("2");
-//            if (localStorage.get("baidu_location") != undefined) {
-//                alert(1)
-//                var geoc = new BMap.Geocoder();
-//                alert(5)
-//                alert(JSON.stringify(localStorage.get("baidu_location")))
-//                geoc.getLocation(new BMap.Point(localStorage.get("baidu_location").longitude, localStorage.get("baidu_location").latitude), function (result) {
-//                    alert(JSON.stringify(result));
-//                    $interval.cancel(getPoint);
-//                });
-//            }
-////            CurrentPosition.getPositionPoint().then(function (result) {
-////                console.log(result)
-////                var point = result.point;
-////                var data = result.data;
-////                localStorage.set("currentPoint", point);
-////                localStorage.set("userChosePoint", point);
-//////                $scope.takePhotoPosition = data.formattedAddress;
-//////            $scope.currentProvince = data.addressComponent.province;
-////                localStorage.set("currentProvince", data.addressComponent.province);
-////                localStorage.set("cityName", {name: data.addressComponent.province});
-////                $scope.currentAreaName = data.addressComponent.district;
-////                $scope.$broadcast('currentProvince', point);
-////                $interval.cancel(getPoint);
-////            });
-////            $window.location.reload();
-//            $cordovaToast.showShortCenter("1");
-//        }, 5000);
+        var getPoint = $interval(function () {
+            var gpsPoint = localStorage.get("baidu_location");
+            if (gpsPoint != null || gpsPoint != undefined) {
+                var geoc = new BMap.Geocoder();
+                geoc.getLocation(new BMap.Point(gpsPoint.longitude, gpsPoint.latitude), function (result) {
+                    localStorage.set("userChosePoint", gpsPoint);
+                    localStorage.set("currentProvince", result.addressComponents.province);
+                    localStorage.set("gpsProvince", result.addressComponents.province);
+                    localStorage.set("currentAddress", result.address);
+                    $interval.cancel(getPoint);
+                    $scope.$broadcast('currentProvince', gpsPoint);
+                });
+            }
+        }, 5000);
     };
 
     $scope.showSymptom = function () {
@@ -82,7 +65,6 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $inter
     }
 
     init();
-
 
     $scope.getCameraOptions = function () {
         return {

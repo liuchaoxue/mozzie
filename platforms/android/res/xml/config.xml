@@ -47,7 +47,7 @@
         <param name="android-package" value="cordova.plugins.Diagnostic" />
         <param name="onload" value="true" />
     </feature>
-    <name>HelloCordova</name>
+    <name>蚊子叮</name>
     <description>
         An Ionic Framework and Cordova project.
     </description>

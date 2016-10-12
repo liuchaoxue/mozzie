@@ -12,11 +12,13 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
             }
         }
         var point = localStorage.get("userChosePoint");
+        var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
         var postData = {
-            "lat": point.latitude,
-            "lon": point.longitude,
-            "time": new Date().toISOString(),
-            "symptoms": all
+            lat: point.latitude,
+            lon: point.longitude,
+            time: new Date().toISOString(),
+            symptoms: all,
+            user_id: objectId
         };
         if ($scope.familySymptom != undefined && $scope.familySymptom != "") {
             postData.family_disease = $scope.familySymptom;

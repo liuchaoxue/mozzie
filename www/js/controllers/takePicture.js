@@ -21,10 +21,14 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
         $scope.takePhotoTime = $filter('date')(new Date(), "HH:mm yyyy/MM/dd");
         $scope.takePhotoTimeISO = new Date().toISOString();
         $scope.imgURL = localStorage.get("imgURL");
-        $scope.takePhotoPosition = localStorage.get("cityName").name;
     }
 
     init();
+    $scope.takePhotoPosition = function () {
+        var gps = localStorage.get("gpsProvince");
+        var current = localStorage.get("currentProvince");
+        return gps == current ? localStorage.get("currentAddress") : current;
+    };
 
     function getUserId() {
         return $scope.getLoginStatus() ? {
@@ -34,25 +38,23 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
         } : null;
     }
 
-    function getImgInfo() {
-        var point = localStorage.get("userChosePoint");
+    function getImgInfo(point) {
         return {
-            imgPosition: $scope.takePhotoPosition,
+            imgPosition: $scope.takePhotoPosition(),
             imgCoordinate: {
                 "__type": "GeoPoint",
                 "latitude": point.latitude,
                 "longitude": point.longitude
             },
-            img: localStorage.get("imgURL"),
+            img: $scope.imgURL,
             mozzieImg: $scope.mozzieimgURL || "",
             user: getUserId()
         };
     }
 
     $scope.postImg = function () {
-        LeanCloudClassService.create("CameraPosition", getImgInfo(), function () {
-            // localStorage.set("lastPage", "/takePicture");
-            var point = localStorage.get("userChosePoint");
+        var point = localStorage.get("userChosePoint");
+        LeanCloudClassService.create("CameraPosition", getImgInfo(point), function () {
             localStorage.set("showMozzinfo", true);
             localStorage.set("lastPicture", {
                 imgPosition: $scope.takePhotoPosition,

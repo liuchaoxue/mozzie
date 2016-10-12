@@ -34,17 +34,18 @@ appControllers.controller('currentLocationCtrl', function ($scope, JumpPagServic
                 position: {latitude: 31.2304, longitude: 121.4737}
             }
         ];
-        $scope.currentProvince = localStorage.get("currentProvince");
+        $scope.currentProvince = localStorage.get("gpsProvince");
     }
 
     init();
 
     $scope.setCurrentCity = function (city) {
-        localStorage.set("cityName", city);
-        if (city.position) {
+        if (typeof city == "object") {
+            localStorage.set("currentProvince", city.name);
             localStorage.set("userChosePoint", city.position);
         } else {
-            localStorage.set("userChosePoint", localStorage.get("currentPoint"));
+            localStorage.set("currentProvince", city);
+            localStorage.set("userChosePoint", localStorage.get("baidu_location"));
         }
         JumpPagService.path("/home")
     }

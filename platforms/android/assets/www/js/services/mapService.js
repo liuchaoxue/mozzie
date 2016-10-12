@@ -7,89 +7,83 @@ appServices
         $ionicPlatform.ready(function () {
             cordova.plugins.diagnostic.requestLocationAuthorization(function () {
                 var getPoint = $interval(function () {
-                var posOptions = {timeout: 35000, enableHighAccuracy: true, maximumAge: 5000};
-                if (device.platform.toLowerCase() === 'ios') {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var lat = position.coords.latitude;
-                        var lon = position.coords.longitude;
-//                            AMap.service('AMap.Geocoder', function () {
-//                                var geocoder = new AMap.Geocoder({
-//                                    city: "010"
-//                                });
+                    var posOptions = {timeout: 35000, enableHighAccuracy: true, maximumAge: 5000};
+                    if (device.platform.toLowerCase() === 'ios') {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            var lat = position.coords.latitude;
+                            var lon = position.coords.longitude;
+//                        AMap.service('AMap.Geocoder', function () {
+//                            var geocoder = new AMap.Geocoder({
+//                                city: "010"
+//                            });
 //
-//                                var lnglatXY = [lon, lat];
-//                                geocoder.getAddress(lnglatXY, function (status, result) {
-//                                    if (status === 'complete' && result.info === 'OK') {
-//                                        defer.resolve({
-//                                            point: {
-//                                                latitude: lat,
-//                                                longitude: lon
-//                                            },
-//                                            data: result.regeocode
-//                                        })
-//                                        $interval.cancel(getPoint);
-//                                    } else {
-//                                        console.log('定位失败');
-//                                    }
-//                                });
+//                            var lnglatXY = [lon, lat];
+//                            geocoder.getAddress(lnglatXY, function (status, result) {
+//                                if (status === 'complete' && result.info === 'OK') {
+//                                    defer.resolve({
+//                                        point: {
+//                                            latitude: lat,
+//                                            longitude: lon
+//                                        },
+//                                        data: result.regeocode
+//                                    })
+//                                } else {
+//                                    console.log('定位失败');
+//                                }
 //                            });
-                        var geoc = new BMap.Geocoder();
-                        geoc.getLocation(new BMap.Point(lon, lat), function (result) {
-                            alert(JSON.stringify(result));
-                            defer.resolve({
-                                point: {
-                                    latitude: lat,
-                                    longitude: lon
-                                },
-                                data: result.addressComponents
-                            })
-                        });
-                    }, function (err) {
-                        console.error("Position error: code=" + err.code + "; message=" + err.message);
-                    }, posOptions);
-                } else {
-                    baidu_location.getCurrentPosition(function (pos) {
-                        // currentPoint.latitude, lon: $scope.currentPoint.longitude
-                        alert('------' + JSON.stringify(pos))
-                        var lat = pos.latitude;
-                        var lon = pos.longitude;
-                        defer.resolve({
-                            point: {
-                                latitude: lat,
-                                longitude: lon
+//                        });
+                            var geoc = new BMap.Geocoder();
+                            geoc.getLocation(new BMap.Point(lon, lat), function (result) {
+                                alert(JSON.stringify(result));
+                                defer.resolve({
+                                    point: {
+                                        latitude: lat,
+                                        longitude: lon
+                                    },
+                                    data: result.addressComponents
+                                })
+                            });
+                        }, function (err) {
+                            console.error("Position error: code=" + err.code + "; message=" + err.message);
+                        }, posOptions);
+                    } else {
+                        baidu_location.getCurrentPosition(function (pos) {
+                            // currentPoint.latitude, lon: $scope.currentPoint.longitude
+//                            var lat = pos.latitude;
+//                            var lon = pos.longitude;
+//                            defer.resolve({
+//                                point: {
+//                                    latitude: lat,
+//                                    longitude: lon
+//                                }
+//                            });
+                            if (pos.describe == "网络定位成功") {
+                                localStorage.set("baidu_location", pos);
+                                $interval.cancel(getPoint);
                             }
-                        });
-                        if(pos.describe == "网络定位成功") {
-                            localStorage.set("baidu_location", pos);
-                            $interval.cancel(getPoint);
-                        }
-//                            AMap.service('AMap.Geocoder', function () {
-//                                var geocoder = new AMap.Geocoder({
-//                                    city: "010"
-//                                });
-//                                alert('service')
-//                                var lnglatXY = [pos.longitude, pos.latitude];
-//                                geocoder.getAddress(lnglatXY, function (status, result) {
-//                                    alert(status)
-//                                    if (status === 'complete' && result.info === 'OK') {
-//                                        defer.resolve({
-//                                            point: {
-//                                                latitude: pos.latitude,
-//                                                longitude: pos.longitude
-//                                            },
-//                                            data: result.regeocode
-//                                        })
-//                                        alert(1)
-//                                        $interval.cancel(getPoint);
-//                                    } else {
-//                                        console.log('定位失败');
-//                                    }
-//                                });
+//                        AMap.service('AMap.Geocoder', function () {
+//                            var geocoder = new AMap.Geocoder({
+//                                city: "010"
 //                            });
-                    }, function (err) {
-                        console.log(err);
-                    });
-                }
+//                            var lnglatXY = [pos.longitude, pos.latitude];
+//                            geocoder.getAddress(lnglatXY, function (status, result) {
+//                                if (status === 'complete' && result.info === 'OK') {
+//                                    defer.resolve({
+//                                        point: {
+//                                            latitude: pos.latitude,
+//                                            longitude: pos.longitude
+//                                        },
+//                                        data: result.regeocode
+//                                    })
+//                                } else {
+//                                    console.log('定位失败');
+//                                }
+//                            });
+//                        });
+                        }, function (err) {
+                            console.log(err);
+                        });
+                    }
                 }, 5000);
             }, function (err) {
                 defer.reject(err);
