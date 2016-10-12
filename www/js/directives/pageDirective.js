@@ -61,16 +61,17 @@ appDirectives.directive("notLoginPage", function () {
 
             function initDonut(imgHeight, textHeight) {
                 var color = "green";
-                if (0 < localStorage.get("postData") && localStorage.get("postData") <= 50) {
+                var num = localStorage.get("postDataNum");
+                if (0 < num && num <= 50) {
                     color = "orange";
-                } else if (50 < localStorage.get("postData") && localStorage.get("postData") <= 100) {
+                } else if (50 < num && num <= 100) {
                     color = "red"
                 }
                 var demoGauge = new Donut(imgHeight).setOptions(getOpts(color));
                 demoGauge.setTextField(textHeight);
                 demoGauge.maxValue = 100;
                 demoGauge.animationSpeed = 5;
-                demoGauge.set(localStorage.get("postData"));
+                demoGauge.set(num);
             }
         },
         templateUrl: "templates/assessmentResultsInfo.html"

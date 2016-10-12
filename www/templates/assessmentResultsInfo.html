@@ -24,9 +24,10 @@
             <img src="./img/touxiang.png" class="assessment-img">
         </div>
 
-        <p class="fs16 result-fs result-lh">根据{{ assessmentAt | date : "yyyy-MM-d H:m:s"
-            }}上传的蚊子叮咬部位图片，结合当前症状和本地区传染病流行风险，尚不能排除感染蚊传疾病的风险。
-            建议到医院就诊，做进一步诊断治疗。</p>
+        <!--<p class="fs16 result-fs result-lh">根据{{ assessmentAt | date : "yyyy-MM-d H:m:s"-->
+            <!--}}上传的蚊子叮咬部位图片，结合当前症状和本地区传染病流行风险，尚不能排除感染蚊传疾病的风险。-->
+            <!--建议到医院就诊，做进一步诊断治疗。</p>-->
+        <p class="fs16 result-fs result-lh">{{textesults}}</p>
     </div>
     <a href="#/nearbyHospital" class="button-block risk-button assessment-button-b"
        nav-transition="none">查看离你最近的医疗机构</a>
