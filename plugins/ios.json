@@ -46,6 +46,9 @@
         },
         "cordova.plugins.diagnostic": {
             "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
         }
     },
     "dependent_plugins": {

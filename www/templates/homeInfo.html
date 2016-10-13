@@ -1,6 +1,6 @@
 <div class="position-r">
     <div class="ic-selected">
-        <img src="./img/webwxgetmsgimg.png" class="home-theme-img spacer-width">
+        <img src="./img/webwxgetmsgimg.png" class="spacer-width" id="indexImg">
     </div>
 
     <p class="home-num-text ta-c">当前累计有<span class="home-num-count" ng-bind="numberOfPeople"></span>人上传叮咬部位图片</p>
@@ -21,17 +21,17 @@
 </table>
 <div class="userCenter-bc home-blank"></div>
 <div class="bc-white">
-    <p class="home-photo-top-text ta-c">蚊叮查一查，防病早知道</p>
+    <!--<p class="home-photo-top-text ta-c">蚊叮查一查，防病早知道</p>-->
 
-    <div class="home-photo-fl">
-        <img src="./img/pz.png" ng-click="takePhoto()" class="home-photo-img">
-
-        <p class="fs16 home-photo-text">叮咬部位</p>
-    </div>
     <div class="home-photo-fl fr">
-        <img src="./img/pg.png" ng-click="goToRiskAssessment()" class="home-photo-img">
+        <img src="./img/pg.png" ng-click="goToRiskAssessment()" id="photo" class="home-photo-img">
 
         <p class="fs16 home-photo-text">风险评估</p>
+    </div>
+    <div class="home-photo-fl fr">
+        <img src="./img/pz.png" ng-click="takePhoto()" id="risk" class="home-photo-img">
+
+        <p class="fs16 home-photo-text">叮咬部位</p>
     </div>
 </div>
 

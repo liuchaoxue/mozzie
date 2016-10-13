@@ -313,6 +313,14 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.diagnostic"
         ]
+    },
+    {
+        "id": "cordova-plugin-app-version.AppVersionPlugin",
+        "file": "plugins/cordova-plugin-app-version/www/AppVersionPlugin.js",
+        "pluginId": "cordova-plugin-app-version",
+        "clobbers": [
+            "cordova.getAppVersion"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -332,7 +340,8 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.3.0",
     "cordova-plugin-inappbrowser": "1.5.0",
     "com.hewz.plugins.baidu.location": "1.0.0",
-    "cordova.plugins.diagnostic": "3.2.1"
+    "cordova.plugins.diagnostic": "3.2.1",
+    "cordova-plugin-app-version": "0.1.9"
 };
 // BOTTOM OF METADATA
 });

@@ -121,13 +121,12 @@
 }
 
 .home-table td {
-    padding-bottom: 25px;
-    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .home-table th {
     vertical-align: middle;
-    padding-top: 25px;
+    padding-top: 10px;
     text-align: center;
 }
 
@@ -148,8 +147,8 @@
     color: white;
 }
 
-.home-theme-img {
-    height: 47%
+.bar {
+    background-size: 0;
 }
 
 .home-blank {
@@ -167,16 +166,15 @@
 }
 
 .home-photo-fl {
-    width: 45%;
-    display: inline-block;
+    margin-top: 10px;
+    width: 50%;
     text-align: center;
 }
 
 .home-photo-img {
-    width: 100px;
+    /*width: 60%;*/
 }
 
 .home-photo-text {
     color: #545454;
-    margin-top: 5px;
 }

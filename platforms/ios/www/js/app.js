@@ -7,7 +7,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
         $ionicConfigProvider.navBar.alignTitle('center');
     })
 
-    .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage) {
+    .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage, $cordovaAppVersion) {
         localStorage.removeItem("isContainProvince");
         localStorage.removeItem("userChosePoint");
         localStorage.removeItem("baidu_location");

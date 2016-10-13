@@ -41,23 +41,22 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
             document.getElementsByClassName("WelcomeSlide")[0].style.display = "none";
         }
     };
-
-    function getUserImg() {
-        LeanCloudClassService.findImg({$ne: null}, function (data) {
-            data.forEach(function (item) {
-                LeanCloudClassService.query("_User", {where: {objectId: item.user.objectId}}, function (userInfo) {
-                    item.username = userInfo[0].username
-                });
-            });
-            localStorage.set('imgInfo', data);
-        });
-    }
+//管理
+//    function getUserImg() {
+//        LeanCloudClassService.findImg({$ne: null}, function (data) {
+//            data.forEach(function (item) {
+//                LeanCloudClassService.query("_User", {where: {objectId: item.user.objectId}}, function (userInfo) {
+//                    item.username = userInfo[0].username
+//                });
+//            });
+//            localStorage.set('imgInfo', data);
+//        });
+//    }
 
     function init() {
         var userAgent = navigator.userAgent;
         $scope.isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
         $scope.isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;
-        getUserImg();
         $scope.getPosition();
 
         $scope.totalFamilySymptom = ["登革热", "基孔肯雅热", "寨卡病毒病", "黄热病", "流行性乙型脑炎", "疟疾"];

@@ -8,6 +8,9 @@
     <div class="list-empty" ng-if="isEmptyList">
         <img src="./img/wu.png" class="spacer-width">
     </div>
+    <div class="list-empty" ng-if="!networkState">
+        <img src="./img/wangluo.png" class="spacer-width" ng-click="getArticleList()">
+    </div>
     <ion-item class="item ic-selected articleList-list-item-p12 fs14" ng-repeat="x in articleInfo" ng-click="goToArticleInfo(x)">
         {{x.title}}
         <span class="articleList-list-time" ng-bind="x.createdAt"></span>

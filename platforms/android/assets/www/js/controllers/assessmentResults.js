@@ -6,6 +6,8 @@ appControllers.controller('assessmentResultsCtrl', function ($scope, $cordovaToa
         JumpPagService.path("/nearbyHospital");
     };
 
+    $scope.textesults = localStorage.get("postDataText");
+
     var currentPoint = localStorage.get("userChosePoint");
     var getFreeNearDeliverSql = "select * from hospitalInfo where " +
         "point near [" + currentPoint.longitude + "," + currentPoint.latitude + "] max 15 km";

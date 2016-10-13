@@ -7,10 +7,6 @@
     line-height: 42px !important;
 }
 
-.login-verification-button:hover {
-    color: white;
-}
-
 .login-text {
     color: #999999;
     margin: 0 12px

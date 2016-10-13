@@ -57,6 +57,9 @@
     <feature name="Diagnostic">
         <param name="ios-package" value="Diagnostic" />
     </feature>
+    <feature name="AppVersion">
+        <param name="ios-package" value="AppVersion" />
+    </feature>
     <name>HelloCordova</name>
     <description>
         An Ionic Framework and Cordova project.

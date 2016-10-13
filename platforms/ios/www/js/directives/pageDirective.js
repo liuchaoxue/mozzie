@@ -16,6 +16,20 @@ appDirectives.directive("notLoginPage", function () {
 }).directive("homePage", function () {
     return {
         restrict: "EA",
+        controller: function () {
+            function init() {
+                setPageHeight("indexImg", 0.45);
+                setPageHeight("photo", 0.15);
+                setPageHeight("risk", 0.15);
+            }
+
+            function setPageHeight(id, num) {
+                var height = window.screen.availHeight;
+                document.getElementById(id).style.height = height * 10000 * num / 10000 + "px";
+            }
+
+            init();
+        },
         templateUrl: "templates/homeInfo.html"
     }
 }).directive("articleListPage", function () {

@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-21.
  */
-appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, $cordovaToast, JumpPagService, $interval, localStorage, $state) {
+appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, $timeout, $cordovaToast, JumpPagService, $interval, localStorage, $state) {
     function init() {
         $scope.verificationButtonText = "获取验证码";
     }
@@ -37,23 +37,27 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
 
     function login(data) {
         LeanCloudLoginService.loginOrRegister(data, function (data) {
-            JumpPagService.path("/home");
+            $interval.cancel($scope.countDown);
             localStorage.set("currentUser", data);
+            $timeout(function () {
+                JumpPagService.path("/home");
+            }, 500);
         });
     }
 
     $scope.showtime = function (time) {
         $scope.showTime = true;
-        $interval(function () {
+        $scope.countDown = $interval(function () {
             if (time == 0) {
                 document.getElementById("sms").style.background = "#d9d9d9";
                 $scope.verificationButtonText = "重发验证码";
                 $scope.showTime = false;
+                $interval.cancel($scope.countDown);
             } else {
                 document.getElementById("sms").style.background = "#ebebeb";
                 time--;
                 $scope.verificationButtonText = time + "s后重发";
             }
-        }, 1000, 61);
+        }, 1000);
     };
 });
