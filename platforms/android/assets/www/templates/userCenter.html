@@ -4,7 +4,10 @@
             <img src="./img/arrow_left.png" class="userCenter-back">
         </div>
     </ion-header-bar>
-    <ion-content padding="false" class="manual-ios-statusbar-padding" overflow-scroll="false">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" overflow-scroll="true">
         <user-center-page></user-center-page>
+        <button ng-click="goToLogin()"
+                class=" userCenter-exit-login button-block bc-white">退出登录
+        </button>
     </ion-content>
 </ion-view>

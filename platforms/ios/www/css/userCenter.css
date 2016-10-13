@@ -10,6 +10,12 @@
     color: #12a9bc;
     border: 1px solid #12a9bc;
     font-size: 18px;
+    width: 95%!important;
+    margin: auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 30px;
 }
 
 .userCenter-exit-login:hover {
