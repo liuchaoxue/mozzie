@@ -21,6 +21,8 @@ appDirectives.directive("notLoginPage", function () {
                 setPageHeight("indexImg", 0.45);
                 setPageHeight("photo", 0.15);
                 setPageHeight("risk", 0.15);
+                setPageHeight("risk_black", 0.15);
+                setPageHeight("photo_black", 0.15);
             }
 
             function setPageHeight(id, num) {

@@ -22,12 +22,17 @@
 <div class="userCenter-bc home-blank"></div>
 <div class="bc-white">
     <div class="home-photo-fl fr">
-        <img src="./img/pg.png" ng-click="goToRiskAssessment()" id="photo" class="home-photo-img">
+        <img src="./img/pg.png" ng-click="goToRiskAssessment()" id="photo" class="home-photo-img"
+             ng-hide="!isShowBlackImg">
+        <img src="./img/pg_black.png" ng-click="goToRiskAssessment()" id="photo_black" class="home-photo-img"
+             ng-hide="isShowBlackImg">
 
         <p class="fs16 home-photo-text">风险评估</p>
     </div>
     <div class="home-photo-fl fr">
-        <img src="./img/pz.png" ng-click="takePhoto()" id="risk" class="home-photo-img">
+        <img src="./img/pz.png" ng-click="takePhoto()" id="risk" class="home-photo-img" ng-hide="!isShowBlackImg">
+        <img src="./img/pz_black.png" ng-click="takePhoto()" id="risk_black" class="home-photo-img"
+             ng-hide="isShowBlackImg">
 
         <p class="fs16 home-photo-text">叮咬部位</p>
     </div>

@@ -66,20 +66,19 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             setBuckButton(backButtonModal);
         });
         setBuckButton(backButtonModal);
-
-        postNewInfo();
-        getNumberOfPeople();
         if (localStorage.get('isContainProvince') === null) {
             localStorage.set("isContainProvince", false);
         }
 
         $scope.checkGps();
+        postNewInfo();
+        getNumberOfPeople();
         getCityName();
     }
 
     $scope.checkGps = function () {
-        var currentProvince = localStorage.get("currentProvince");
-        if (currentProvince != null) {
+        $scope.isShowBlackImg = localStorage.get("currentProvince");
+        if ($scope.isShowBlackImg != null) {
             $scope.homePageShowProvince = localStorage.get("currentProvince");
         } else {
             $scope.homePageShowProvince = "定位中";
