@@ -25,7 +25,6 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 }
             }).success(function (data) {
                 $scope.mozzieInfo = data.result.insects;
-                alert(JSON.stringify(data.result.insects))
                 $scope.imgUrl = localStorage.get("imgURL");
                 $scope.modal.show();
             }).error(function (err) {
@@ -131,10 +130,10 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     };
 
     $scope.goToRiskAssessment = function () {
-        if (!localStorage.get('isContainProvince')) {
-            return $cordovaToast.showShortCenter("暂时不支持该地区")
-        }
         if ($scope.getLoginStatus()) {
+            if (!localStorage.get('isContainProvince')) {
+                return $cordovaToast.showShortCenter("暂时不支持该地区")
+            }
             var query = {
                 "__type": "Pointer",
                 "className": "_User",

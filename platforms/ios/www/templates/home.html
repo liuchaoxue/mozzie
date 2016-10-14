@@ -26,14 +26,16 @@
                 </ion-header-bar>
                 <img src="./img/arrow_right.png" ng-click="lastSlide()" class="home-modal-arrow home-modal-arrow-l">
                 <img src="./img/arrow_left.png" ng-click="nextSlide()" class="home-modal-arrow home-modal-arrow-r">
-                <ion-slide-box does-continue="false" show-pager="false" auto-play="false" slide-interval="true"
+                <ion-slide-box does-continue="false" show-pager="false" auto-play="false" slide-interval="8000"
                                on-swipe-right="lastSlide()" on-swipe-left="nextSlide()">
                     <ion-slide ng-repeat="x in mozzieInfo">
                         <div class="takePicture-img-div">
                             <img ng-src="{{imgUrl}}" class="takePicture-img-show">
-                            <img ng-src="{{x.img.url}}"
-                                 class="home-carrousel-img-size home-modal-carrousel-mozzie-ing">
 
+                            <div class="home-modal-carrousel-mozzie-img">
+                                <img ng-src="{{x.img.url}}"
+                                     class="home-carrousel-img-size">
+                            </div>
                             <div class="home-carrousel-img-text">
                                 被<span ng-bind="x.name"></span>叮咬的概率: {{x.chance*10000 * 100 / 10000}}%
                             </div>
@@ -43,9 +45,9 @@
                         </ion-item>
                         <div ng-bind-html="x.desc" class="home-modal-text-p16"></div>
                         <!--<form class="list home-modal-text-p16 spacer-width" ng-repeat="y in x.illness">-->
-                            <!--<p class="home-modal-title-name" ng-bind="y.title"></p>-->
+                        <!--<p class="home-modal-title-name" ng-bind="y.title"></p>-->
 
-                            <!--<p ng-bind="y.content" class="home-modal-center"></p>-->
+                        <!--<p ng-bind="y.content" class="home-modal-center"></p>-->
                         <!--</form>-->
                     </ion-slide>
                 </ion-slide-box>
