@@ -9,13 +9,13 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
                 v.checked = false;
             })
         }
-    }
+    };
 
     $scope.onCheck = function (s) {
         if (s.checked) {
             $scope.uncheckAll.checked = false;
         }
-    }
+    };
 
     function getAllChecked() {
         var all = [];
@@ -32,7 +32,6 @@ appControllers.controller('riskAssessmentCtrl', function ($scope, JumpPagService
 
     $scope.goToRiskAssessment = function () {
         var all = getAllChecked();
-        console.log(all);
         if (all.length == 0) {
             return $cordovaToast.showShortCenter("请选择症状");
         }

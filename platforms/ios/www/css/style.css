@@ -64,10 +64,6 @@
     font-size: 14px !important;
 }
 
-.mr25 {
-    margin-right: 25px
-}
-
 .result-fs {
     color: #888;
 }
@@ -89,7 +85,12 @@
 }
 
 .mt10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
+}
+
+.back-button {
+    position: absolute;
+    right: 15px;
 }
 
 .h18 {
