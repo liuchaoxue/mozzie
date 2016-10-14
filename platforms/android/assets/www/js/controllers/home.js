@@ -25,6 +25,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 }
             }).success(function (data) {
                 $scope.mozzieInfo = data.result.insects;
+                alert(JSON.stringify(data.result.insects))
                 $scope.imgUrl = localStorage.get("imgURL");
                 $scope.modal.show();
             }).error(function (err) {

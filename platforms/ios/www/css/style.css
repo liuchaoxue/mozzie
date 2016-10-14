@@ -88,7 +88,11 @@
     margin-top: 10px !important;
 }
 
-.back-button {
+.mt8 {
+    margin-top: 8px!important;
+}
+
+.fork-back-button {
     position: absolute;
     right: 15px;
 }
