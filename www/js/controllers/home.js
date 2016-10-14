@@ -61,19 +61,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         localStorage.removeItem("modal");
     }
 
-    function init() {
-        var backButtonModal = backButton.modal(isModalShow, function () {
-            setBuckButton(backButtonModal);
-        });
-        setBuckButton(backButtonModal);
-        if (localStorage.get('isContainProvince') === null) {
-            localStorage.set("isContainProvince", false);
-        }
-
-        $scope.checkGps();
-        postNewInfo();
-        getNumberOfPeople();
-        getCityName();
+    function userId() {
+        return {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": localStorage.get("currentUser").objectId
+        };
     }
 
     $scope.checkGps = function () {
@@ -99,8 +92,6 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 localStorage.set('isContainProvince', is.result.valid);
             });
     });
-
-    init();
 
     function getNumberOfPeople() {
         var data = {where: {objectId: "57baaba7165abd006624d642"}};
@@ -134,12 +125,8 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             if (!localStorage.get('isContainProvince')) {
                 return $cordovaToast.showShortCenter("暂时不支持该地区")
             }
-            var query = {
-                "__type": "Pointer",
-                "className": "_User",
-                "objectId": localStorage.get("currentUser").objectId
-            };
-            LeanCloudClassService.findImg(query, function (data) {
+
+            LeanCloudClassService.findImg(userId(), function (data) {
                 if (data.length === 0) {
                     $cordovaToast.showShortCenter("您还尚未上传过图片");
                 } else {
@@ -194,6 +181,29 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
 
     $scope.lastSlide = function () {
         $ionicSlideBoxDelegate.previous();
+    };
+
+    function init() {
+        var backButtonModal = backButton.modal(isModalShow, function () {
+            setBuckButton(backButtonModal);
+        });
+        setBuckButton(backButtonModal);
+        if ($scope.getLoginStatus()) {
+            LeanCloudClassService.findImg(userId(), function (data) {
+                $scope.isShowBlackPgImg = data.length !== 0;
+            });
+        } else {
+            $scope.isShowBlackPgImg = false;
+        }
+        if (localStorage.get('isContainProvince') === null) {
+            localStorage.set("isContainProvince", false);
+        }
+
+        $scope.checkGps();
+        postNewInfo();
+        getNumberOfPeople();
+        getCityName();
     }
-})
-;
+
+    init();
+});

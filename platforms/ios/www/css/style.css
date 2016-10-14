@@ -20,6 +20,10 @@
     color: white;
 }
 
+.button-shadow {
+    text-shadow: 0 0 20px black;
+}
+
 .fl {
     float: left;
 }
@@ -89,7 +93,11 @@
 }
 
 .mt8 {
-    margin-top: 8px!important;
+    margin-top: 8px !important;
+}
+
+.mt4 {
+    margin-top: 4px !important;
 }
 
 .fork-back-button {
