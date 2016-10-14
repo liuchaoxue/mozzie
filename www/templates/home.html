@@ -26,8 +26,7 @@
                 </ion-header-bar>
                 <img src="./img/arrow_right.png" ng-click="lastSlide()" class="home-modal-arrow home-modal-arrow-l">
                 <img src="./img/arrow_left.png" ng-click="nextSlide()" class="home-modal-arrow home-modal-arrow-r">
-                <ion-slide-box does-continue="false" show-pager="false" auto-play="false" slide-interval="8000"
-                               on-swipe-right="lastSlide()" on-swipe-left="nextSlide()">
+                <ion-slide-box>
                     <ion-slide ng-repeat="x in mozzieInfo">
                         <div class="takePicture-img-div">
                             <img ng-src="{{imgUrl}}" class="takePicture-img-show">
