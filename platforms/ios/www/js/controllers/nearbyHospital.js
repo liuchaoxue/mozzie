@@ -27,7 +27,7 @@ appControllers.controller('nearbyHospitalCtrl', function ($scope, JumpPagService
             map.clearOverlays();
             for (var i = 0; i < data.length; i++) {
                 data[i].range = getRange(data[i].point);
-                map.centerAndZoom(data[i].province, 14);
+                //map.centerAndZoom(data[i].province, 14);
 
                 addOverlay(data[i].point, i);
                 totalInfo += getListHtml(i + 1, data[i].name, data[i].province + data[i].position, data[i].range);
