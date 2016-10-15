@@ -29,8 +29,9 @@
                 <ion-slide-box>
                     <ion-slide ng-repeat="x in mozzieInfo">
                         <div class="takePicture-img-div">
-                            <img ng-src="{{imgUrl}}" class="takePicture-img-show">
-
+                            <!--<img ng-src="{{imgUrl}}" class="takePicture-img-show">-->
+                            <div ng-style="{'background':'url({{imgUrl}})','background-position':'0 50%','background-size':'cover'}"
+                                 style="height: 300px; width: 100%;"></div>
                             <div class="home-modal-carrousel-mozzie-img">
                                 <img ng-src="{{x.img.url}}"
                                      class="home-carrousel-img-size">
