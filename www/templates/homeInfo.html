@@ -23,16 +23,16 @@
 <div class="bc-white">
     <div class="home-photo-fl fr">
         <img src="./img/pg.png" ng-click="goToRiskAssessment()" id="photo" class="home-photo-img"
-             ng-hide="!isShowBlackPgImg">
+             ng-show="isShowBlackPgImg&&isContainProvince">
         <img src="./img/pg_black.png" ng-click="goToRiskAssessment()" id="photo_black" class="home-photo-img"
-             ng-hide="isShowBlackPgImg">
+             ng-hide="isShowBlackPgImg&&isContainProvince">
 
         <p class="fs16 home-photo-text">风险评估</p>
     </div>
     <div class="home-photo-fl fr">
-        <img src="./img/pz.png" ng-click="takePhoto()" id="risk" class="home-photo-img" ng-hide="!isShowBlackImg">
+        <img src="./img/pz.png" ng-click="takePhoto()" id="risk" class="home-photo-img" ng-show="isContainProvince">
         <img src="./img/pz_black.png" ng-click="takePhoto()" id="risk_black" class="home-photo-img"
-             ng-hide="isShowBlackImg">
+             ng-hide="isContainProvince">
 
         <p class="fs16 home-photo-text">叮咬部位</p>
     </div>

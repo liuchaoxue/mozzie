@@ -27,6 +27,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 $scope.mozzieInfo = data.result.insects;
                 $scope.imgUrl = localStorage.get("imgURL");
                 $scope.modal.show();
+                document.getElementById("arrow_right").style.display = "none";
             }).error(function (err) {
                 return $cordovaToast.showShortCenter("上传失败");
             });
@@ -69,14 +70,14 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         };
     }
 
-    $scope.checkGps = function () {
+    function setShowProvinceName() {
         $scope.isShowBlackImg = localStorage.get("currentProvince");
         if ($scope.isShowBlackImg != null) {
-            $scope.homePageShowProvince = localStorage.get("currentProvince");
+            $scope.homePageShowProvince = $scope.isShowBlackImg;
         } else {
             $scope.homePageShowProvince = "定位中";
         }
-    };
+    }
 
     $scope.$on("currentProvince", function (event, data) {
         var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
@@ -88,8 +89,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                     "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
                 }
             }).success(function (is) {
-                $scope.checkGps();
-                localStorage.set('isContainProvince', is.result.valid);
+                setShowProvinceName();
+                var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];
+                if (include.indexOf(localStorage.get("gpsProvince")) != -1) {
+                    localStorage.set('isContainProvince', is.result.valid);
+                    $scope.isContainProvince = is.result.valid;
+                }
             });
     });
 
@@ -103,7 +108,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     function getCityName() {
         var currentCity = localStorage.get("currentProvince");
         var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];//todo
-        if (currentCity != null && include.indexOf(currentCity)) {
+        if (currentCity != null && include.indexOf(currentCity) != -1) {
             localStorage.set('isContainProvince', true);
         } else {
             localStorage.set('isContainProvince', false);
@@ -183,11 +188,12 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         $ionicSlideBoxDelegate.previous();
     };
 
-    function init() {
-        var backButtonModal = backButton.modal(isModalShow, function () {
-            setBuckButton(backButtonModal);
-        });
-        setBuckButton(backButtonModal);
+    $scope.hideArrow = function (index) {
+        document.getElementById("arrow_right").style.display = index == 0 ? "none" : "block";
+        document.getElementById("arrow_left").style.display = index == 2 ? "none" : "block";
+    };
+
+    function setImgShow() {
         if ($scope.getLoginStatus()) {
             LeanCloudClassService.findImg(userId(), function (data) {
                 $scope.isShowBlackPgImg = data.length !== 0;
@@ -198,11 +204,19 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
         if (localStorage.get('isContainProvince') === null) {
             localStorage.set("isContainProvince", false);
         }
+    }
 
-        $scope.checkGps();
+    function init() {
+        var backButtonModal = backButton.modal(isModalShow, function () {
+            setBuckButton(backButtonModal);
+        });
+        setBuckButton(backButtonModal);
+        setImgShow();
+        setShowProvinceName();
         postNewInfo();
         getNumberOfPeople();
         getCityName();
+        $scope.isContainProvince = localStorage.get('isContainProvince');
     }
 
     init();

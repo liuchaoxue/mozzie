@@ -24,9 +24,9 @@
                     </button>
                     <h1 class="title white button-shadow">可能蚊种</h1>
                 </ion-header-bar>
-                <img src="./img/arrow_right.png" ng-click="lastSlide()" class="home-modal-arrow home-modal-arrow-l">
-                <img src="./img/arrow_left.png" ng-click="nextSlide()" class="home-modal-arrow home-modal-arrow-r">
-                <ion-slide-box>
+                <img src="./img/arrow_right.png" ng-click="lastSlide()" id="arrow_right" class="home-modal-arrow home-modal-arrow-l">
+                <img src="./img/arrow_left.png" ng-click="nextSlide()" id="arrow_left" class="home-modal-arrow home-modal-arrow-r">
+                <ion-slide-box on-slide-changed="hideArrow($index)">
                     <ion-slide ng-repeat="x in mozzieInfo">
                         <div class="takePicture-img-div">
                             <!--<img ng-src="{{imgUrl}}" class="takePicture-img-show">-->

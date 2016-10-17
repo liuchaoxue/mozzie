@@ -42,9 +42,11 @@ appControllers.controller('currentLocationCtrl', function ($scope, JumpPagServic
     $scope.setCurrentCity = function (city) {
         if (typeof city == "object") {
             localStorage.set("currentProvince", city.name);
+            city.position.gps = false;
             localStorage.set("userChosePoint", city.position);
         } else {
             localStorage.set("currentProvince", city);
+            localStorage.get("baidu_location").gps = true;
             localStorage.set("userChosePoint", localStorage.get("baidu_location"));
         }
         JumpPagService.path("/home")

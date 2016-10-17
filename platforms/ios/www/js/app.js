@@ -8,8 +8,8 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
     })
 
     .run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $cordovaToast, localStorage, $cordovaAppVersion) {
-        localStorage.removeItem("isContainProvince");
-        localStorage.removeItem("userChosePoint");
+//        localStorage.removeItem("isContainProvince");
+//        localStorage.removeItem("userChosePoint");
         localStorage.removeItem("baidu_location");
         localStorage.removeItem("currentAddress");
 

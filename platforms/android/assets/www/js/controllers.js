@@ -16,8 +16,11 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
             if (gpsPoint != null || gpsPoint != undefined) {
                 var geoc = new BMap.Geocoder();
                 geoc.getLocation(new BMap.Point(gpsPoint.longitude, gpsPoint.latitude), function (result) {
-                    localStorage.set("userChosePoint", gpsPoint);
-                    localStorage.set("currentProvince", result.addressComponents.province);
+                    var provinceName = localStorage.get("currentProvince");
+                    if (provinceName == null && provinceName == undefined) {
+                        localStorage.set("userChosePoint", gpsPoint);
+                        localStorage.set("currentProvince", result.addressComponents.province);
+                    }
                     localStorage.set("gpsProvince", result.addressComponents.province);
                     localStorage.set("currentAddress", result.address);
                     $interval.cancel(getPoint);
