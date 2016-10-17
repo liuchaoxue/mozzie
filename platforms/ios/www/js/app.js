@@ -34,6 +34,10 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+            window.cordova.getAppVersion.getVersionNumber(function (version) {
+                alert(version);
+            });
+
 
             window.LeanPush.init();
 
