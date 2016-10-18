@@ -56,7 +56,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app requires calendar access to function properly.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>&quot;蚊子叮&quot;想访问您的相机</string>
+	<string>&quot;蚊子叮&quot;想访问你的相机</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires contacts access to function properly.</string>
 	<key>NSLocationAlwaysUsageDescription</key>

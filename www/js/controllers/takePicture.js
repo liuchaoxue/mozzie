@@ -1,7 +1,7 @@
 /**
  * Created by liu on 16-7-27.
  */
-appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cordovaCamera, $filter, localStorage, $cordovaToast, LeanCloudClassService, JumpPagService) {
+appControllers.controller('takePictureCtrl', function ($http, $scope, $ionicLoading, $state, $cordovaCamera, $filter, localStorage, $cordovaToast, LeanCloudClassService, JumpPagService) {
 
     $scope.mosquitoPhotoShoot = function () {
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
@@ -54,6 +54,13 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
 
     $scope.postImg = function () {
         var point = localStorage.get("userChosePoint");
+        $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
         LeanCloudClassService.create("CameraPosition", getImgInfo(point), function () {
             localStorage.set("showMozzinfo", true);
             var lastPicture = {
@@ -83,6 +90,7 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
                 "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
             }
         }).success(function (data) {
+            $ionicLoading.hide();
             $state.go("home", {openInsects: data.result.insects});
         }).error(function (err) {
             return $cordovaToast.showShortCenter("上传失败");
