@@ -2,13 +2,27 @@ var appControllers = angular.module('app.controllers', []);
 var appServices = angular.module('app.services', []);
 var appDirectives = angular.module('app.directives', []);
 
-appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordovaToast, $interval, CurrentPosition, LeanCloudClassService) {
+appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordovaToast, $interval, CurrentAppVersion, CurrentPosition) {
 
     document.addEventListener("click", function () {
         if (navigator.onLine == false) {
             $cordovaToast.showShortCenter("网络不给力")
         }
     });
+
+    function getAppVersion() {
+        CurrentAppVersion.getAppVer().then(function (ver) {
+            var appVersion = localStorage.get("currentAppVersion");
+            if (appVersion == null) {
+                document.getElementsByClassName("WelcomeSlide")[0].style.height = 100 + "%";
+                localStorage.set("currentAppVersion", JSON.stringify(ver))
+            } else if (JSON.stringify(ver) != appVersion) {
+                document.getElementsByClassName("WelcomeSlide")[0].style.height = 100 + "%";
+            } else {
+                document.getElementsByClassName("WelcomeSlide")[0].style.height = 0;
+            }
+        });
+    }
 
     $scope.getPosition = function () {
         var getPoint = $interval(function () {
@@ -41,7 +55,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
 
     $scope.hideWelcomePictures = function (index) {
         if (index == 2 || index == undefined) {
-            document.getElementsByClassName("WelcomeSlide")[0].style.display = "none";
+            document.getElementsByClassName("WelcomeSlide")[0].style.height = 0;
         }
     };
 //管理
@@ -57,6 +71,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
 //    }
 
     function init() {
+        getAppVersion();
         var userAgent = navigator.userAgent;
         $scope.isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
         $scope.isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;

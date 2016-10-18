@@ -35,7 +35,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
                 StatusBar.styleDefault();
             }
             window.cordova.getAppVersion.getVersionNumber(function (version) {
-                alert(version);
+                console.log(version);
             });
 
 

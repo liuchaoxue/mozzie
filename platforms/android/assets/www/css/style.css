@@ -166,7 +166,8 @@
 .WelcomeSlide {
     position: fixed;
     z-index: 100;
-    height: 100%;
+    height: 0;
+    /*height: 100%;*/
 }
 
 .WelcomeSlide img {
