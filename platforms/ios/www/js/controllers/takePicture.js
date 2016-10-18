@@ -56,15 +56,36 @@ appControllers.controller('takePictureCtrl', function ($rootScope, $scope, $cord
         var point = localStorage.get("userChosePoint");
         LeanCloudClassService.create("CameraPosition", getImgInfo(point), function () {
             localStorage.set("showMozzinfo", true);
-            localStorage.set("lastPicture", {
+            var lastPicture = {
                 imgPosition: $scope.takePhotoPosition,
                 imgCoordinate: {
                     "latitude": point.latitude,
                     "longitude": point.longitude
                 },
                 takePhotoTimeISO: $scope.takePhotoTimeISO
-            });
-            JumpPagService.path("/home");
+            };
+            localStorage.set("lastPicture", lastPicture);
+            getMozzieImg(lastPicture);
+        });
+    };
+
+    function getMozzieImg(lastPicture) {
+        var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
+        $http.post("https://leancloud.cn/1.1/functions/insect_statistic", {
+            lat: lastPicture.imgCoordinate.latitude,
+            lon: lastPicture.imgCoordinate.longitude,
+            time: lastPicture.takePhotoTimeISO,
+            user_id: objectId
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+                "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+            }
+        }).success(function (data) {
+            $state.go("home", {openInsects: data.result.insects});
+        }).error(function (err) {
+            return $cordovaToast.showShortCenter("上传失败");
         });
     }
 });

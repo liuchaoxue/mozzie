@@ -10,28 +10,10 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             hardwareBackButtonClose: true
         }).then(function (modal) {
             $scope.modal = modal;
-            var lastPicture = localStorage.get('lastPicture');
-            var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
-            $http.post("https://leancloud.cn/1.1/functions/insect_statistic", {
-                lat: lastPicture.imgCoordinate.latitude,
-                lon: lastPicture.imgCoordinate.longitude,
-                time: lastPicture.takePhotoTimeISO,
-                user_id: objectId
-            }, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
-                    "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
-                }
-            }).success(function (data) {
-                $scope.mozzieInfo = data.result.insects;
-                $scope.imgUrl = localStorage.get("imgURL");
-                $scope.modal.show();
-                document.getElementById("arrow_right").style.display = "none";
-            }).error(function (err) {
-                return $cordovaToast.showShortCenter("上传失败");
-            });
-
+            $scope.mozzieInfo = $stateParams.openInsects;
+            $scope.imgUrl = localStorage.get("imgURL");
+            $scope.modal.show();
+            document.getElementById("arrow_right").style.display = "none";
         });
     };
     if (localStorage.get("showMozzinfo") == true) {
