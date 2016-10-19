@@ -14,13 +14,9 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
         CurrentAppVersion.getAppVer().then(function (ver) {
             var appVersion = localStorage.get("currentAppVersion");
             if (appVersion == null) {
-                document.getElementsByClassName("WelcomeSlide")[0].style.height = 100 + "%";
+                $scope.isWelcomeSlideHide = false;
                 localStorage.set("currentAppVersion", JSON.stringify(ver))
-            } else if (JSON.stringify(ver) != appVersion) {
-                document.getElementsByClassName("WelcomeSlide")[0].style.height = 100 + "%";
-            } else {
-                document.getElementsByClassName("WelcomeSlide")[0].style.height = 0;
-            }
+            } else $scope.isWelcomeSlideHide = JSON.stringify(ver) == appVersion;
         });
     }
 
@@ -55,7 +51,7 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
 
     $scope.hideWelcomePictures = function (index) {
         if (index == 2 || index == undefined) {
-            document.getElementsByClassName("WelcomeSlide")[0].style.height = 0;
+            $scope.isWelcomeSlideHide = true;
         }
     };
 //管理

@@ -72,8 +72,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
                 }
             }).success(function (is) {
                 setShowProvinceName();
-                var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];
-                if (include.indexOf(localStorage.get("gpsProvince")) != -1) {
+                if (is.result.valid) {
                     localStorage.set('isContainProvince', is.result.valid);
                     $scope.isContainProvince = is.result.valid;
                 }
@@ -88,13 +87,29 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
     }
 
     function getCityName() {
-        var currentCity = localStorage.get("currentProvince");
-        var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];//todo
-        if (currentCity != null && include.indexOf(currentCity) != -1) {
-            localStorage.set('isContainProvince', true);
+        var currentCity = localStorage.get("userChosePoint");
+        var objectId = localStorage.get("currentUser") != undefined ? localStorage.get("currentUser").objectId : "";
+        if (currentCity != null) {
+            $http.post("https://leancloud.cn/1.1/functions/options",
+                {lat: currentCity.latitude, lon: currentCity.longitude, user_id: objectId}, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-LC-Id": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
+                        "X-LC-Key": "Ronj9oBORrmjCDx2HdlhCwr3"
+                    }
+                }).success(function (is) {
+                    localStorage.set('isContainProvince', is.result.take_picture.available);
+                });
         } else {
             localStorage.set('isContainProvince', false);
         }
+        //var currentCity = localStorage.get("currentProvince");
+        //var include = ["", "广东省", "云南省", "广西壮族自治区", "海南省", "福建省", "浙江省", "上海市", "河北省", "北京市"];//todo
+        //if (currentCity != null && include.indexOf(currentCity) != -1) {
+        //    localStorage.set('isContainProvince', true);
+        //} else {
+        //    localStorage.set('isContainProvince', false);
+        //}
     }
 
 
@@ -182,9 +197,6 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             });
         } else {
             $scope.isShowBlackPgImg = false;
-        }
-        if (localStorage.get('isContainProvince') === null) {
-            localStorage.set("isContainProvince", false);
         }
     }
 
