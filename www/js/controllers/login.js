@@ -10,6 +10,7 @@ appControllers.controller('loginCtrl', function ($scope, LeanCloudLoginService, 
 
     $scope.changeColor = function () {
         document.getElementsByClassName("login-verification-button")[0].style.background = "#51addc";
+        document.getElementsByClassName("login-verification-button")[0].style.color = "white";
     };
 
     $scope.postSms = function (number) {

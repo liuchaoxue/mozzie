@@ -5,13 +5,15 @@
     </button>
 </ion-header-bar>
 <ion-content padding="false" class="has-header" overflow-scroll="false" on-drag-right="onDragRight()">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     <div class="list-empty" ng-if="isEmptyList">
         <img src="./img/wu.png" class="spacer-width">
     </div>
     <div class="list-empty" ng-if="!networkState">
-        <img src="./img/wangluo.png" class="spacer-width" ng-click="getArticleList()">
+        <img src="./img/wangluo.png" class="spacer-width" ng-click="doRefresh()">
     </div>
-    <ion-item class="item ic-selected articleList-list-item-p12 fs14" ng-repeat="x in articleInfo" ng-click="goToArticleInfo(x)">
+    <ion-item class="item ic-selected articleList-list-item-p12 fs14" ng-repeat="x in articleInfo"
+              ng-click="goToArticleInfo(x)">
         {{x.title}}
         <span class="articleList-list-time" ng-bind="x.createdAt"></span>
     </ion-item>

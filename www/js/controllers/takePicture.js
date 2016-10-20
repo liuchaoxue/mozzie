@@ -6,6 +6,8 @@ appControllers.controller('takePictureCtrl', function ($http, $scope, $ionicLoad
     $scope.mosquitoPhotoShoot = function () {
         $cordovaCamera.getPicture($scope.getCameraOptions()).then(function (imageData) {
             $scope.mozzieimgURL = "data:image/jpeg;base64," + imageData || "";
+            document.getElementById("mozzieimgURL").style.background = "url("+ $scope.mozzieimgURL +") no-repeat scroll 0 50%";
+            document.getElementById("mozzieimgURL").style.backgroundSize = "cover";
         });
     };
 
@@ -51,9 +53,7 @@ appControllers.controller('takePictureCtrl', function ($http, $scope, $ionicLoad
             user: getUserId()
         };
     }
-
-    $scope.postImg = function () {
-        var point = localStorage.get("userChosePoint");
+    function showLoadIng() {
         $ionicLoading.show({
             content: 'Loading',
             animation: 'fade-in',
@@ -61,6 +61,10 @@ appControllers.controller('takePictureCtrl', function ($http, $scope, $ionicLoad
             maxWidth: 200,
             showDelay: 0
         });
+    }
+    $scope.postImg = function () {
+        var point = localStorage.get("userChosePoint");
+        showLoadIng();
         LeanCloudClassService.create("CameraPosition", getImgInfo(point), function () {
             localStorage.set("showMozzinfo", true);
             var lastPicture = {

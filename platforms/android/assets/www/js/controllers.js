@@ -13,10 +13,15 @@ appControllers.controller('appLoginCtrl', function ($scope, localStorage, $cordo
     function getAppVersion() {
         CurrentAppVersion.getAppVer().then(function (ver) {
             var appVersion = localStorage.get("currentAppVersion");
+            alert(ver)
+            alert('-----------')
+            alert(appVersion)
             if (appVersion == null) {
                 $scope.isWelcomeSlideHide = false;
+                alert('123')
                 localStorage.set("currentAppVersion", JSON.stringify(ver))
             } else $scope.isWelcomeSlideHide = JSON.stringify(ver) == appVersion;
+            alert($scope.isWelcomeSlideHide+'=====')
         });
     }
 

@@ -1,8 +1,7 @@
 <form class="list ">
-    <ion-item class="padding0 takePicture-img-div userCenter-icon-border">
+    <ion-item class="padding0  userCenter-icon-border">
         <div ng-style="{'background':'url({{imgURL}})','background-position':'0 50%','background-size':'cover'}"
-             style="height: 300px; width: 100%;"></div>
-        <!--<img ng-show="imgURL !== undefined" ng-src="{{imgURL}}" class="takePicture-img-show" id="mozzieImg">-->
+             class="takePicture-img-div"></div>
     </ion-item>
     <ion-item class="item ic-selected fs16 userCenter-icon-border">
         被叮时间、地点(大约)：
@@ -19,9 +18,9 @@
     <ion-item class="item-icon-right item ic-selected" ng-click="mosquitoPhotoShoot()">
         补充蚊子照片<i class="icon ion-ios-arrow-right fs20"></i></ion-item>
 
-    <ion-item class="padding0 takePicture-img-div userCenter-icon-border"
+    <ion-item class="padding0 userCenter-icon-border"
               ng-class="{true:'h0',false:''}[getMozzieImgState()]">
-        <img ng-show="mozzieimgURL !== undefined" ng-src="{{mozzieimgURL}}" class="takePicture-img-show">
+        <div ng-show="mozzieimgURL !== undefined" id="mozzieimgURL" class="takePicture-img-div"></div>
     </ion-item>
 
     <div class="spacer spacer-width h18 userCenter-bc"></div>

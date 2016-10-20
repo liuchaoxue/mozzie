@@ -14,6 +14,7 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
             $scope.imgUrl = localStorage.get("imgURL");
             $scope.modal.show();
             document.getElementById("arrow_right").style.display = "none";
+            $scope.slideText = (window.screen.availHeight - 400) + "px";
         });
     };
     if (localStorage.get("showMozzinfo") == true) {
@@ -124,10 +125,6 @@ appControllers.controller("homeCtrl", function ($rootScope, $scope, $ionicModal,
 
     $scope.goToRiskAssessment = function () {
         if ($scope.getLoginStatus()) {
-            if (!localStorage.get('isContainProvince')) {
-                return $cordovaToast.showShortCenter("暂时不支持该地区")
-            }
-
             LeanCloudClassService.findImg(userId(), function (data) {
                 if (data.length === 0) {
                     $cordovaToast.showShortCenter("您还尚未上传过图片");

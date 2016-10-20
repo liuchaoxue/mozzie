@@ -7,6 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.hewz.plugins.baidu.location": {
+            "API_KEY": "VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK",
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         },
@@ -19,9 +26,21 @@
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
         "cordova-plugin-leanpush": {
             "LEAN_APP_ID": "FDCqzaM1bcHHJ80LU36VEIv1-gzGzoHsz",
             "LEAN_APP_KEY": "Ronj9oBORrmjCDx2HdlhCwr3",
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         },
         "cordova-plugin-whitelist": {
@@ -30,24 +49,7 @@
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         },
-        "cordova-plugin-wechat": {
-            "WECHATAPPID": "wxc7f5bfd56fa22317",
-            "PACKAGE_NAME": "com.ionicframework.starter"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
-        },
-        "com.hewz.plugins.baidu.location": {
-            "API_KEY": "VKxmPFuviR4uzakcK5ZW5GXAxeAfIbsK",
-            "PACKAGE_NAME": "com.ionicframework.starter"
-        },
         "cordova.plugins.diagnostic": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
-        },
-        "cordova-plugin-app-version": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         }
     },
